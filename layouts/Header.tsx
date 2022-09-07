@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/router'
+import { linksTypes } from '../types/navbar'
 
 const StyledNav = styled('ul')(({ theme }) => ({
   margin: 0,
@@ -72,6 +73,43 @@ const StyledDropDown = styled(Box)(({ theme }) => ({
   }
 }))
 
+const links: linksTypes[] = [
+  {
+    url: '/simulador',
+    name: 'Simulador'
+  },
+  {
+    url: '/comparador',
+    name: 'Comparador'
+  },
+  {
+    url: '/concecionarias',
+    name: 'Concecionarias'
+  },
+  {
+    url: '/prestamos',
+    name: 'Prestamos',
+    subMenu: [
+      {
+        url: '#beneficios',
+        name: 'Beneficios'
+      },
+      {
+        url: '#requisitos',
+        name: 'Requisitos'
+      }
+    ]
+  },
+  {
+    url: '/sucursales',
+    name: 'Sucursales'
+  },
+  {
+    url: '/contacto',
+    name: 'Contacto'
+  }
+]
+
 const Header = () => {
   const theme = useTheme()
   const router = useRouter()
@@ -81,60 +119,34 @@ const Header = () => {
         <StyledNav>
           <li className="logo">
             <Link href="/">
-              <a className={router.pathname === '/' ? 'active' : ''}>
+              <a>
                 <Image src="/img/logo.svg" width={40} height={40} />
               </a>
             </Link>
           </li>
-          <li>
-            <Link href="/simulador">
-              <a className={router.pathname === '/simulador' ? 'active' : ''}>Simulador</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/comparador">
-              <a className={router.pathname === '/comparador' ? 'active' : ''}>Comparador</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/concecionarias">
-              <a className={router.pathname === '/concecionarias' ? 'active' : ''}>
-                Concecionarias
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/prestamos">
-              <a className={router.pathname === '/prestamos' ? 'active' : ''}>
-                Préstamos
-                <ExpandMoreIcon className="moreIcon" />
-              </a>
-            </Link>
-            <StyledDropDown className="dropDown">
-              <ul>
-                <li>
-                  <Link href="#beneficios">
-                    <a>Beneficios</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#requisitos">
-                    <a>Requisitos</a>
-                  </Link>
-                </li>
-              </ul>
-            </StyledDropDown>
-          </li>
-          <li>
-            <Link href="/sucursales">
-              <a className={router.pathname === '/sucursales' ? 'active' : ''}>Sucursales</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="#contacto">
-              <a>Contacto</a>
-            </Link>
-          </li>
+          {links.map((item, i) => (
+            <li key={i}>
+              <Link href={`${item.url}`}>
+                <a className={router.pathname === `${item.url}` ? 'active' : ''}>
+                  {item.name}
+                  {item.subMenu && <ExpandMoreIcon className="moreIcon" />}
+                </a>
+              </Link>
+              {item.subMenu && (
+                <StyledDropDown className="dropDown">
+                  <ul>
+                    {item.subMenu.map((sub, j) => (
+                      <li key={j}>
+                        <Link href={`${item.url}${sub.url}`}>
+                          <a>{sub.name}</a>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </StyledDropDown>
+              )}
+            </li>
+          ))}
         </StyledNav>
       </Container>
     </Box>
