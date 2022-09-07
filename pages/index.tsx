@@ -17,16 +17,11 @@ const StyledTable = styled(Box)(({ theme }) => ({
 
 const Home: NextPage = () => {
   return (
-    <Container maxWidth="lg">
-      <Box>
-        {/* <StyledTable>
-          ...
-        </StyledTable> */}
-        <Typography variant="body1" color="initial">
-          empieza aqui
-        </Typography>
-      </Box>
-    </Container>
+    <Box>
+      <Typography variant="body1" color="initial">
+        Home
+      </Typography>
+    </Box>
   )
 }
 

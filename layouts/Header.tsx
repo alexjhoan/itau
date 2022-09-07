@@ -11,7 +11,7 @@ const StyledNav = styled('ul')(({ theme }) => ({
   paddingLeft: 0,
   display: 'flex',
   listStyle: 'none',
-  height: 65,
+  height: 60,
   alignItems: 'center',
   columnGap: theme.spacing(2),
   '& li.logo': {
@@ -34,9 +34,8 @@ const StyledNav = styled('ul')(({ theme }) => ({
         }
       },
       '& .dropDown': {
-        zIndex: 20,
         '& ul': {
-          height: '100px',
+          maxHeight: '200px',
           opacity: '1'
         }
       }
@@ -51,26 +50,41 @@ const StyledNav = styled('ul')(({ theme }) => ({
 
 const StyledDropDown = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  zIndex: -1,
   paddingTop: 15,
-  transition: 'z-index ease-in-out .5s',
+  transition: 'all ease-in-out 1s',
   '& ul': {
     backgroundColor: '#000000cc',
     display: 'flex',
     flexDirection: 'column',
-    padding: '10px 5px',
     minWidth: '120px',
     maxWidth: '200px',
-    height: '0px',
+    maxHeight: '0px',
     opacity: '0',
     transition: 'all ease-in-out .2s',
     margin: 0,
     paddingLeft: 0,
     listStyle: 'none',
+    overflow: 'hidden',
     '& li': {
-      padding: theme.spacing(0.7, 1)
+      padding: theme.spacing(0.7, 1.5),
+      '&:first-of-type': {
+        paddingTop: theme.spacing(2)
+      },
+      '&:last-of-type': {
+        paddingBottom: theme.spacing(2)
+      }
     }
   }
+}))
+
+const StyledNavBar = styled(Box)(({ theme }) => ({
+  position: 'fixed',
+  zIndex: 20,
+  backgroundColor: theme.palette.primary.main,
+  top: 0,
+  width: '100%',
+  left: 0,
+  boxShadow: `0 5px 10px ${theme.palette.common.black}4`
 }))
 
 const links: linksTypes[] = [
@@ -111,10 +125,9 @@ const links: linksTypes[] = [
 ]
 
 const Header = () => {
-  const theme = useTheme()
   const router = useRouter()
   return (
-    <Box sx={{ backgroundColor: theme.palette.primary.main }}>
+    <StyledNavBar>
       <Container maxWidth="lg">
         <StyledNav>
           <li className="logo">
@@ -149,7 +162,7 @@ const Header = () => {
           ))}
         </StyledNav>
       </Container>
-    </Box>
+    </StyledNavBar>
   )
 }
 
