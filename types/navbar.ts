@@ -6,3 +6,8 @@ export type linksTypes = {
     name: String
   }[]
 }
+
+export interface navBarTypes {
+  logo: string
+  links: linksTypes[]
+}

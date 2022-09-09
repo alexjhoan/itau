@@ -26,7 +26,7 @@ const theme = responsiveFontSizes(
         main: '#fafb02'
       },
       text: {
-        primary: '#12446e'
+        primary: '#333333'
       }
     },
     typography: {
