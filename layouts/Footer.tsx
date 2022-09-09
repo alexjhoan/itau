@@ -12,7 +12,7 @@ const Footer = () => {
   const styleIcon = {
     color: theme.palette.common.white,
     '&:hover': {
-      color: theme.palette.secondary.main
+      color: theme.palette.third.main
     }
   }
   return (

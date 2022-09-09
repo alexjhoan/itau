@@ -23,12 +23,12 @@ const StyledNav = styled('ul')(({ theme }) => ({
       color: theme.palette.common.white,
       position: 'relative',
       '&.active': {
-        color: theme.palette.secondary.main
+        color: theme.palette.third.main
       }
     },
     '&:hover': {
       '& > a': {
-        color: theme.palette.secondary.main,
+        color: theme.palette.third.main,
         '& .moreIcon': {
           transform: 'rotate(-180deg)'
         }
