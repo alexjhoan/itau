@@ -27,6 +27,10 @@ const theme = responsiveFontSizes(
       },
       text: {
         primary: '#333333'
+      },
+      common: {
+        white: '#ffffff',
+        black: '#000000'
       }
     },
     typography: {

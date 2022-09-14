@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper'
+import Search from '../components/Search'
 
 const StyledHome = styled(Box)(({ theme }) => ({
   '& .swiper-button-prev': {
@@ -34,7 +35,8 @@ const StyledBanner = styled(Box)(({ theme }) => ({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  height: 'calc(80vh - 60px)',
+  minHeight: '450px',
+  height: 'calc(100vh - 316px)',
   display: 'flex',
   alignItems: 'center',
   '& .contentBanner': {
@@ -71,6 +73,7 @@ const Home: NextPage = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <Search />
     </StyledHome>
   )
 }
