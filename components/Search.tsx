@@ -89,7 +89,7 @@ const dropDownsInit = {
 const Search = () => {
   const [nuevo, setNuevo] = useState<SearchDropDownsTypes>(dropDownsInit)
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, elemento: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, elemento: string) => {
     setNuevo({
       ...nuevo,
       [elemento]: {
