@@ -55,7 +55,6 @@ const CustomSwiper = ({ children }: CustomSwiperTypes): JSX.Element => {
         loop={true}
         slidesPerView={3}
         className={'swiperRecents'}
-        // TODO: el responsive de las fechas toca hacerlo con stilos display none
         onInit={(swiper) => {
           // @ts-ignore
           swiper.params.navigation.prevEl = navigationPrevRef?.current

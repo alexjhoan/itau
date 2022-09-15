@@ -13,9 +13,11 @@ import {
   TextField,
   Grow
 } from '@mui/material'
+import ClickAwayListener from '@mui/base/ClickAwayListener'
 import SearchIcon from '@mui/icons-material/Search'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { grey } from '@mui/material/colors'
+import { SearchDropDownsTypes } from '../types/components'
 
 const StyledSearch = styled(Box)(({ theme }) => ({
   backgroundColor: grey[300],
@@ -50,24 +52,6 @@ const StyledDropdown = styled(FormGroup)(({ theme }) => ({
   boxShadow: `0 5px 10px ${theme.palette.common.black}80`
 }))
 
-interface SearchDropDownsTypes {
-  type: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
-  brand: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
-  state: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
-}
-
 const dropDownsInit = {
   type: {
     anchorEl: null,
@@ -87,17 +71,21 @@ const dropDownsInit = {
 }
 
 const Search = () => {
-  const [nuevo, setNuevo] = useState<SearchDropDownsTypes>(dropDownsInit)
+  const [dropDowns, setDropDowns] = useState<SearchDropDownsTypes>(dropDownsInit)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, elemento: string) => {
-    setNuevo({
-      ...nuevo,
+    setDropDowns({
+      ...dropDowns,
       [elemento]: {
         anchorEl: event.currentTarget,
-        open: !nuevo[elemento as keyof SearchDropDownsTypes].open,
+        open: !dropDowns[elemento as keyof SearchDropDownsTypes].open,
         width: event.currentTarget.offsetWidth
       }
     })
+  }
+
+  const closeAll = () => {
+    setDropDowns(dropDownsInit)
   }
 
   // TODO: montar un ClickAwayListener para cerrar los dropdowns https://mui.com/material-ui/react-menu/#main-content
@@ -112,133 +100,135 @@ const Search = () => {
         <Typography variant="h5" mb={2.5}>
           Seleccioná los filtros para empezar tu búsqueda:
         </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} lg={2}>
-            <StyledBtnDropdown
-              variant="text"
-              fullWidth
-              endIcon={
-                <KeyboardArrowDownIcon
-                  sx={{
-                    transition: 'transform ease-in-out .2s',
-                    transform: nuevo.type.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                  }}
+        <ClickAwayListener onClickAway={closeAll}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4} lg={2}>
+              <StyledBtnDropdown
+                variant="text"
+                fullWidth
+                endIcon={
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      transition: 'transform ease-in-out .2s',
+                      transform: dropDowns.type.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                    }}
+                  />
+                }
+                onClick={(e) => handleClick(e, 'type')}
+              >
+                Tipo de vehiculo
+              </StyledBtnDropdown>
+              <Popper
+                open={dropDowns.type.open}
+                anchorEl={dropDowns.type.anchorEl}
+                sx={{ width: dropDowns.type.width, zIndex: 19 }}
+                placement="bottom-start"
+                transition
+              >
+                {({ TransitionProps }) => (
+                  <Grow {...TransitionProps}>
+                    <StyledDropdown>
+                      <FormControlLabel control={<Checkbox />} label="Autos" />
+                      <FormControlLabel control={<Checkbox />} label="Camioneta" />
+                      <FormControlLabel control={<Checkbox />} label="Compacto" />
+                      <FormControlLabel control={<Checkbox />} label="Desportivo" />
+                      <FormControlLabel control={<Checkbox />} label="Moto" />
+                    </StyledDropdown>
+                  </Grow>
+                )}
+              </Popper>
+            </Grid>
+            <Grid item xs={12} sm={4} lg={2}>
+              <StyledBtnDropdown
+                variant="text"
+                fullWidth
+                endIcon={
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      transition: 'transform ease-in-out .2s',
+                      transform: dropDowns.brand.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                    }}
+                  />
+                }
+                onClick={(e) => handleClick(e, 'brand')}
+              >
+                Marca
+              </StyledBtnDropdown>
+              <Popper
+                open={dropDowns.brand.open}
+                anchorEl={dropDowns.brand.anchorEl}
+                placement="bottom-start"
+                transition
+                sx={{ width: dropDowns.brand.width, zIndex: 19 }}
+              >
+                {({ TransitionProps }) => (
+                  <Grow {...TransitionProps}>
+                    <StyledDropdown>
+                      <FormControlLabel control={<Checkbox />} label="Audi" />
+                      <FormControlLabel control={<Checkbox />} label="BMW" />
+                      <FormControlLabel control={<Checkbox />} label="Brillance" />
+                      <FormControlLabel control={<Checkbox />} label="BYD" />
+                      <FormControlLabel control={<Checkbox />} label="Chana" />
+                    </StyledDropdown>
+                  </Grow>
+                )}
+              </Popper>
+            </Grid>
+            <Grid item xs={12} sm={4} lg={2}>
+              <StyledBtnDropdown
+                variant="text"
+                fullWidth
+                endIcon={
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      transition: 'transform ease-in-out .2s',
+                      transform: dropDowns.state.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                    }}
+                  />
+                }
+                onClick={(e) => handleClick(e, 'state')}
+              >
+                Estado
+              </StyledBtnDropdown>
+              <Popper
+                open={dropDowns.state.open}
+                anchorEl={dropDowns.state.anchorEl}
+                sx={{ width: dropDowns.state.width, zIndex: 19 }}
+                placement="bottom-start"
+                transition
+              >
+                {({ TransitionProps }) => (
+                  <Grow {...TransitionProps}>
+                    <StyledDropdown>
+                      <FormControlLabel control={<Checkbox />} label="Nuevo" />
+                      <FormControlLabel control={<Checkbox />} label="Usado" />
+                    </StyledDropdown>
+                  </Grow>
+                )}
+              </Popper>
+            </Grid>
+            <Grid item xs={12} sm={8} lg={4}>
+              <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>
+                <TextField
+                  type={'number'}
+                  label="Min (Gs.)"
+                  sx={{ backgroundColor: '#fff', width: '100%' }}
                 />
-              }
-              onClick={(e) => handleClick(e, 'type')}
-            >
-              Tipo de vehiculo
-            </StyledBtnDropdown>
-            <Popper
-              open={nuevo.type.open}
-              anchorEl={nuevo.type.anchorEl}
-              sx={{ width: nuevo.type.width, zIndex: 19 }}
-              placement="bottom-start"
-              transition
-            >
-              {({ TransitionProps }) => (
-                <Grow {...TransitionProps}>
-                  <StyledDropdown>
-                    <FormControlLabel control={<Checkbox />} label="Autos" />
-                    <FormControlLabel control={<Checkbox />} label="Camioneta" />
-                    <FormControlLabel control={<Checkbox />} label="Compacto" />
-                    <FormControlLabel control={<Checkbox />} label="Desportivo" />
-                    <FormControlLabel control={<Checkbox />} label="Moto" />
-                  </StyledDropdown>
-                </Grow>
-              )}
-            </Popper>
-          </Grid>
-          <Grid item xs={12} sm={4} lg={2}>
-            <StyledBtnDropdown
-              variant="text"
-              fullWidth
-              endIcon={
-                <KeyboardArrowDownIcon
-                  sx={{
-                    transition: 'transform ease-in-out .2s',
-                    transform: nuevo.brand.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                  }}
+                <span>-</span>
+                <TextField
+                  type={'number'}
+                  label="Max (Gs.)"
+                  sx={{ backgroundColor: '#fff', width: '100%' }}
                 />
-              }
-              onClick={(e) => handleClick(e, 'brand')}
-            >
-              Marca
-            </StyledBtnDropdown>
-            <Popper
-              open={nuevo.brand.open}
-              anchorEl={nuevo.brand.anchorEl}
-              placement="bottom-start"
-              transition
-              sx={{ width: nuevo.brand.width, zIndex: 19 }}
-            >
-              {({ TransitionProps }) => (
-                <Grow {...TransitionProps}>
-                  <StyledDropdown>
-                    <FormControlLabel control={<Checkbox />} label="Audi" />
-                    <FormControlLabel control={<Checkbox />} label="BMW" />
-                    <FormControlLabel control={<Checkbox />} label="Brillance" />
-                    <FormControlLabel control={<Checkbox />} label="BYD" />
-                    <FormControlLabel control={<Checkbox />} label="Chana" />
-                  </StyledDropdown>
-                </Grow>
-              )}
-            </Popper>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4} lg={2}>
+              <Button variant="contained" color="primary" fullWidth sx={{ height: 56 }}>
+                Buscar
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={4} lg={2}>
-            <StyledBtnDropdown
-              variant="text"
-              fullWidth
-              endIcon={
-                <KeyboardArrowDownIcon
-                  sx={{
-                    transition: 'transform ease-in-out .2s',
-                    transform: nuevo.state.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                  }}
-                />
-              }
-              onClick={(e) => handleClick(e, 'state')}
-            >
-              Estado
-            </StyledBtnDropdown>
-            <Popper
-              open={nuevo.state.open}
-              anchorEl={nuevo.state.anchorEl}
-              sx={{ width: nuevo.state.width, zIndex: 19 }}
-              placement="bottom-start"
-              transition
-            >
-              {({ TransitionProps }) => (
-                <Grow {...TransitionProps}>
-                  <StyledDropdown>
-                    <FormControlLabel control={<Checkbox />} label="Nuevo" />
-                    <FormControlLabel control={<Checkbox />} label="Usado" />
-                  </StyledDropdown>
-                </Grow>
-              )}
-            </Popper>
-          </Grid>
-          <Grid item xs={12} sm={8} lg={4}>
-            <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>
-              <TextField
-                type={'number'}
-                label="Min (Gs.)"
-                sx={{ backgroundColor: '#fff', width: '100%' }}
-              />
-              <span>-</span>
-              <TextField
-                type={'number'}
-                label="Max (Gs.)"
-                sx={{ backgroundColor: '#fff', width: '100%' }}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={4} lg={2}>
-            <Button variant="contained" color="primary" fullWidth sx={{ height: 56 }}>
-              Buscar
-            </Button>
-          </Grid>
-        </Grid>
+        </ClickAwayListener>
       </Container>
     </StyledSearch>
   )
