@@ -21,6 +21,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import AutoCard from '../components/AutoCard'
 import { useRef, useState, useEffect } from 'react'
+import CustomSwiper from '../components/CustomSwiper'
 
 const StyledHome = styled(Box)(({ theme }) => ({
   '& .swiperBanner .swiper-button-prev': {
@@ -107,23 +108,12 @@ const sectionLend = [
 
 const Home: NextPage = () => {
   const theme = useTheme()
-  // const [swiper, setSwiper] = useState()
 
   const navigationPrevRef = useRef<HTMLDivElement>(null)
   const navigationNextRef = useRef<HTMLDivElement>(null)
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const isSm = useMediaQuery(theme.breakpoints.down('md'))
   const isMd = useMediaQuery(theme.breakpoints.down('lg'))
-
-  // useEffect(() => {
-  //   if (swiper) {
-  //     console.log('Swiper instance:', swiper)
-  //     swiper.params.navigation.prevEl = navigationPrevRef.current
-  //     swiper.params.navigation.nextEl = navigationNextRef.current
-  //     swiper.navigation.init()
-  //     swiper.navigation.update()
-  //   }
-  // }, [swiper])
 
   return (
     <StyledHome>
@@ -166,53 +156,21 @@ const Home: NextPage = () => {
           ))}
         </Grid>
       </Container>
-      <Box sx={{ backgroundColor: grey[100], py: 8 }}>
-        <Container maxWidth={'lg'}>
+      <Box sx={{ backgroundColor: grey[100], py: 8, overflow: 'hidden' }}>
+        <Container maxWidth={isMd ? 'md' : 'lg'}>
           <Typography variant="h4" align={'center'} gutterBottom>
             <b>¡Mirá las opciones que tenemos para ti!</b>
           </Typography>
           <Typography variant="h6" align={'center'} mb={4}>
             Financiación hasta el 100% del valor del vehículo 0km que elijas
           </Typography>
-          <div className="swiper-button" ref={navigationPrevRef}>
-            prev
-          </div>
-          <Swiper
-            modules={[Navigation]}
-            loop={true}
-            slidesPerView={3}
-            className={'swiperRecents'}
-            // TODO: el responsive de las fechas toca hacerlo con stilos display none
-            onInit={(swiper) => {
-              // @ts-ignore
-              swiper.params.navigation.prevEl = navigationPrevRef?.current
-              // @ts-ignore
-              swiper.params.navigation.nextEl = navigationNextRef?.current
-              swiper.navigation.init()
-              swiper.navigation.update()
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 0
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 15
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 15
-              }
-            }}
-          >
+          <CustomSwiper>
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <SwiperSlide key={i}>
                 <AutoCard />
               </SwiperSlide>
             ))}
-          </Swiper>
-          <div ref={navigationNextRef}>next</div>
+          </CustomSwiper>
         </Container>
       </Box>
     </StyledHome>

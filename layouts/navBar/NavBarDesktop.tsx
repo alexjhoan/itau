@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { linksTypes, navBarTypes } from '../../types/navbar'
+import { linksTypes, navBarTypes } from '../../types/layouts'
 
 const StyledNav = styled('ul')(({ theme }) => ({
   margin: 0,

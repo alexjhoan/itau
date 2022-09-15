@@ -1,6 +1,6 @@
 import { Box, Container, styled, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
-import { linksTypes } from '../types/navbar'
+import { linksTypes } from '../types/layouts'
 import NavBarDesktop from './navBar/NavBarDesktop'
 import NavBarMobile from './navBar/NavBarMobile'
 

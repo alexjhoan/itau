@@ -3,7 +3,7 @@ import { Box, styled, IconButton, Drawer, useTheme } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import Link from 'next/link'
 import Image from 'next/image'
-import { linksTypes, navBarTypes } from '../../types/navbar'
+import { linksTypes, navBarTypes } from '../../types/layouts'
 import { useRouter } from 'next/router'
 
 const StyledNav = styled(Box)(({ theme }) => ({
@@ -58,7 +58,7 @@ const NavBarMobile = ({ logo, links }: navBarTypes) => {
       <Drawer anchor={'top'} open={openDrawer} onClose={() => setopenDrawer(false)}>
         <StyledMenu>
           {links.map((item: linksTypes, i: number) => (
-            <Link href={`${item.url}`}>
+            <Link href={`${item.url}`} key={i}>
               <a
                 className={router.pathname === `${item.url}` ? 'active' : ''}
                 onClick={() => setopenDrawer(false)}

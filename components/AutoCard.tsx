@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { styled, Typography, Card, Stack, Button, IconButton } from '@mui/material'
+import { styled, Typography, Card, Stack, IconButton, useTheme, useMediaQuery } from '@mui/material'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -24,9 +24,12 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }))
 
 const AutoCard = () => {
+  const theme = useTheme()
+  const isMd = useMediaQuery(theme.breakpoints.down('lg'))
+
   return (
     <StyledCard>
-      <Typography className="title" noWrap>
+      <Typography variant={'body1'} className="title" noWrap>
         <b>nombre car</b>
       </Typography>
       <Image src={'/img/autos/prueba.png'} width={300} height={180} layout="responsive" />
@@ -35,7 +38,7 @@ const AutoCard = () => {
           <Typography color="text.secondary" mb={-1}>
             Desde
           </Typography>
-          <Typography variant="h4">
+          <Typography variant={isMd ? 'h5' : 'h4'}>
             <b>Gs. 000.000.000</b>
           </Typography>
         </div>
