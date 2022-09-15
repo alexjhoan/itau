@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import {
   Box,
   Container,
@@ -70,7 +70,15 @@ const dropDownsInit = {
   }
 }
 
-const Search = () => {
+// TODO: buscar el type del evento click
+
+interface SearchTypes {
+  title?: String | ReactNode
+  subTitle: String
+  onClick?: any
+}
+
+const Search = ({ title, subTitle, onClick }: SearchTypes) => {
   const [dropDowns, setDropDowns] = useState<SearchDropDownsTypes>(dropDownsInit)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, elemento: string) => {
@@ -88,17 +96,19 @@ const Search = () => {
     setDropDowns(dropDownsInit)
   }
 
-  // TODO: montar un ClickAwayListener para cerrar los dropdowns https://mui.com/material-ui/react-menu/#main-content
+  // TODO: cambiar los select por https://mui.com/material-ui/react-select/#main-content
 
   return (
     <StyledSearch>
       <Container maxWidth={'lg'}>
-        <Typography variant="h4" color="secondary" className="title">
-          <SearchIcon />
-          Buscá tu <b>próximo vehículo</b>
-        </Typography>
+        {title && (
+          <Typography variant="h4" color="secondary" className="title">
+            <SearchIcon />
+            {title}
+          </Typography>
+        )}
         <Typography variant="h5" mb={2.5}>
-          Seleccioná los filtros para empezar tu búsqueda:
+          {subTitle}
         </Typography>
         <ClickAwayListener onClickAway={closeAll}>
           <Grid container spacing={2}>
@@ -223,7 +233,13 @@ const Search = () => {
               </Box>
             </Grid>
             <Grid item xs={12} sm={4} lg={2}>
-              <Button variant="contained" color="primary" fullWidth sx={{ height: 56 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ height: 56 }}
+                onClick={onClick}
+              >
                 Buscar
               </Button>
             </Grid>

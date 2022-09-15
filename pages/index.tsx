@@ -10,9 +10,10 @@ import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import AutoCard from '../components/AutoCard'
-import { useRef } from 'react'
 import CustomSwiper from '../components/CustomSwiper'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { Fragment } from 'react'
 
 const StyledHome = styled(Box)(({ theme }) => ({
   '& .swiperBanner .swiper-button-prev': {
@@ -99,10 +100,7 @@ const sectionLend = [
 
 const Home: NextPage = () => {
   const theme = useTheme()
-
-  const navigationPrevRef = useRef<HTMLDivElement>(null)
-  const navigationNextRef = useRef<HTMLDivElement>(null)
-  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
+  const router = useRouter()
   const isSm = useMediaQuery(theme.breakpoints.down('md'))
   const isMd = useMediaQuery(theme.breakpoints.down('lg'))
 
@@ -129,7 +127,15 @@ const Home: NextPage = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Search />
+      <Search
+        onClick={() => router.push('/buscador')}
+        subTitle={'Seleccioná los filtros para empezar tu búsqueda:'}
+        title={
+          <Fragment>
+            Buscá tu <b>próximo vehículo</b>
+          </Fragment>
+        }
+      />
       <Container maxWidth={'lg'}>
         <Grid container spacing={4} my={5}>
           {sectionLend.map((item, i) => (
