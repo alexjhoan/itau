@@ -1,13 +1,29 @@
-import { Box, Container, styled, Typography, useMediaQuery, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  styled,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Grid,
+  Card,
+  CardContent
+} from '@mui/material'
 import type { NextPage } from 'next'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper'
 import Search from '../components/Search'
+import { grey } from '@mui/material/colors'
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
+import AutoCard from '../components/AutoCard'
+import { useRef, useState, useEffect } from 'react'
 
 const StyledHome = styled(Box)(({ theme }) => ({
-  '& .swiper-button-prev': {
+  '& .swiperBanner .swiper-button-prev': {
     color: theme.palette.common.white,
     opacity: '0.6',
     transition: 'opacity ease-in-out .2s',
@@ -18,7 +34,7 @@ const StyledHome = styled(Box)(({ theme }) => ({
       opacity: '1'
     }
   },
-  '& .swiper-button-next': {
+  '& .swiperBanner .swiper-button-next': {
     color: theme.palette.common.white,
     opacity: '0.6',
     transition: 'opacity ease-in-out .2s',
@@ -51,14 +67,73 @@ const StyledBanner = styled(Box)(({ theme }) => ({
   }
 }))
 
+const StyledLendCard = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '& .iconItem': {
+    display: 'flex',
+    background: `linear-gradient(90deg, #FF9F0Fe6 0%, #DC772D 100%)`,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'fit-content',
+    padding: theme.spacing(2),
+    borderRadius: '100%',
+    marginBottom: theme.spacing(3),
+    '& svg': {
+      color: theme.palette.common.white,
+      fontSize: 40
+    }
+  }
+}))
+
+const sectionLend = [
+  {
+    icon: <TimeToLeaveIcon />,
+    title: 'Accedé al vehículo que deseás',
+    text: 'Te financiamos hasta el 100% del valor del vehículo 0 Km que elijas, hasta 60 meses de plazo y a sola firma.'
+  },
+  {
+    icon: <VerifiedUserIcon />,
+    title: 'Protección de tu vehículo',
+    text: 'Seguro de vehículo con descuento promocional hasta el 25% sobre el valor de la póliza para vehículos 0 Km'
+  },
+  {
+    icon: <RequestQuoteIcon />,
+    title: 'Uso consciente del dinero',
+    text: 'Para elegir tu auto evaluá y compará los precios y las mejores opciones, contá con tu asesor quien te guiará para definir el plazo y capital que más te convenga.'
+  }
+]
+
 const Home: NextPage = () => {
   const theme = useTheme()
+  // const [swiper, setSwiper] = useState()
+
+  const navigationPrevRef = useRef<HTMLDivElement>(null)
+  const navigationNextRef = useRef<HTMLDivElement>(null)
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const isSm = useMediaQuery(theme.breakpoints.down('md'))
   const isMd = useMediaQuery(theme.breakpoints.down('lg'))
+
+  // useEffect(() => {
+  //   if (swiper) {
+  //     console.log('Swiper instance:', swiper)
+  //     swiper.params.navigation.prevEl = navigationPrevRef.current
+  //     swiper.params.navigation.nextEl = navigationNextRef.current
+  //     swiper.navigation.init()
+  //     swiper.navigation.update()
+  //   }
+  // }, [swiper])
+
   return (
     <StyledHome>
-      <Swiper navigation={isSm ? false : true} modules={[Navigation]} loop={true} slidesPerView={1}>
+      <Swiper
+        navigation={isSm ? false : true}
+        modules={[Navigation]}
+        loop={true}
+        slidesPerView={1}
+        className={'swiperBanner'}
+      >
         {[1, 2, 3].map((i) => (
           <SwiperSlide key={i}>
             <StyledBanner sx={{ backgroundImage: 'url(/img/bannerHome.jpg)' }}>
@@ -74,6 +149,72 @@ const Home: NextPage = () => {
         ))}
       </Swiper>
       <Search />
+      <Container maxWidth={'lg'}>
+        <Grid container spacing={4} my={5}>
+          {sectionLend.map((item, i) => (
+            <Grid item xs={12} sm={4} key={i}>
+              <StyledLendCard>
+                <Box className="iconItem">{item.icon}</Box>
+                <Typography variant="h5" align="center" gutterBottom>
+                  <b>{item.title}</b>
+                </Typography>
+                <Typography variant="body1" align="center">
+                  {item.text}
+                </Typography>
+              </StyledLendCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Box sx={{ backgroundColor: grey[100], py: 8 }}>
+        <Container maxWidth={'lg'}>
+          <Typography variant="h4" align={'center'} gutterBottom>
+            <b>¡Mirá las opciones que tenemos para ti!</b>
+          </Typography>
+          <Typography variant="h6" align={'center'} mb={4}>
+            Financiación hasta el 100% del valor del vehículo 0km que elijas
+          </Typography>
+          <div className="swiper-button" ref={navigationPrevRef}>
+            prev
+          </div>
+          <Swiper
+            modules={[Navigation]}
+            loop={true}
+            slidesPerView={3}
+            className={'swiperRecents'}
+            // TODO: el responsive de las fechas toca hacerlo con stilos display none
+            onInit={(swiper) => {
+              // @ts-ignore
+              swiper.params.navigation.prevEl = navigationPrevRef?.current
+              // @ts-ignore
+              swiper.params.navigation.nextEl = navigationNextRef?.current
+              swiper.navigation.init()
+              swiper.navigation.update()
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 0
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 15
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 15
+              }
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <SwiperSlide key={i}>
+                <AutoCard />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div ref={navigationNextRef}>next</div>
+        </Container>
+      </Box>
     </StyledHome>
   )
 }

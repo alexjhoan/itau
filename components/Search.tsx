@@ -100,6 +100,8 @@ const Search = () => {
     })
   }
 
+  // TODO: montar un ClickAwayListener para cerrar los dropdowns https://mui.com/material-ui/react-menu/#main-content
+
   return (
     <StyledSearch>
       <Container maxWidth={'lg'}>
@@ -115,7 +117,14 @@ const Search = () => {
             <StyledBtnDropdown
               variant="text"
               fullWidth
-              endIcon={<KeyboardArrowDownIcon />}
+              endIcon={
+                <KeyboardArrowDownIcon
+                  sx={{
+                    transition: 'transform ease-in-out .2s',
+                    transform: nuevo.type.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                  }}
+                />
+              }
               onClick={(e) => handleClick(e, 'type')}
             >
               Tipo de vehiculo
@@ -144,7 +153,14 @@ const Search = () => {
             <StyledBtnDropdown
               variant="text"
               fullWidth
-              endIcon={<KeyboardArrowDownIcon />}
+              endIcon={
+                <KeyboardArrowDownIcon
+                  sx={{
+                    transition: 'transform ease-in-out .2s',
+                    transform: nuevo.brand.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                  }}
+                />
+              }
               onClick={(e) => handleClick(e, 'brand')}
             >
               Marca
@@ -154,7 +170,7 @@ const Search = () => {
               anchorEl={nuevo.brand.anchorEl}
               placement="bottom-start"
               transition
-              sx={{ width: nuevo.type.width, zIndex: 19 }}
+              sx={{ width: nuevo.brand.width, zIndex: 19 }}
             >
               {({ TransitionProps }) => (
                 <Grow {...TransitionProps}>
@@ -173,7 +189,14 @@ const Search = () => {
             <StyledBtnDropdown
               variant="text"
               fullWidth
-              endIcon={<KeyboardArrowDownIcon />}
+              endIcon={
+                <KeyboardArrowDownIcon
+                  sx={{
+                    transition: 'transform ease-in-out .2s',
+                    transform: nuevo.state.open ? 'rotate(-180deg)' : 'rotate(0deg)'
+                  }}
+                />
+              }
               onClick={(e) => handleClick(e, 'state')}
             >
               Estado
@@ -181,7 +204,7 @@ const Search = () => {
             <Popper
               open={nuevo.state.open}
               anchorEl={nuevo.state.anchorEl}
-              sx={{ width: nuevo.type.width, zIndex: 19 }}
+              sx={{ width: nuevo.state.width, zIndex: 19 }}
               placement="bottom-start"
               transition
             >
