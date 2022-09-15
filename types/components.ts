@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
+import { SwiperProps } from 'swiper/react'
 
-export interface CustomSwiperTypes {
+export interface CustomSwiperTypes extends SwiperProps {
   children: ReactNode
 }
 

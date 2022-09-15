@@ -42,7 +42,7 @@ const SwiperBtnStyled = styled(IconButton)(({ theme }) => ({
   }
 }))
 
-const CustomSwiper = ({ children }: CustomSwiperTypes): JSX.Element => {
+const CustomSwiper = ({ children, ...rest }: CustomSwiperTypes): JSX.Element => {
   const navigationPrevRef = useRef<HTMLDivElement>(null)
   const navigationNextRef = useRef<HTMLDivElement>(null)
   return (
@@ -52,9 +52,7 @@ const CustomSwiper = ({ children }: CustomSwiperTypes): JSX.Element => {
       </div>
       <Swiper
         modules={[Navigation]}
-        loop={true}
-        slidesPerView={3}
-        className={'swiperRecents'}
+        {...rest}
         onInit={(swiper) => {
           // @ts-ignore
           swiper.params.navigation.prevEl = navigationPrevRef?.current
@@ -62,20 +60,6 @@ const CustomSwiper = ({ children }: CustomSwiperTypes): JSX.Element => {
           swiper.params.navigation.nextEl = navigationNextRef?.current
           swiper.navigation.init()
           swiper.navigation.update()
-        }}
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            spaceBetween: 0
-          },
-          600: {
-            slidesPerView: 2,
-            spaceBetween: 10
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 15
-          }
         }}
       >
         {children}

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Container,
-  styled,
-  Typography,
-  useMediaQuery,
-  useTheme,
-  Grid,
-  Card,
-  CardContent
-} from '@mui/material'
+import { Box, Container, styled, Typography, useMediaQuery, useTheme, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -20,8 +10,9 @@ import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import AutoCard from '../components/AutoCard'
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import CustomSwiper from '../components/CustomSwiper'
+import Image from 'next/image'
 
 const StyledHome = styled(Box)(({ theme }) => ({
   '& .swiperBanner .swiper-button-prev': {
@@ -164,12 +155,67 @@ const Home: NextPage = () => {
           <Typography variant="h6" align={'center'} mb={4}>
             Financiación hasta el 100% del valor del vehículo 0km que elijas
           </Typography>
-          <CustomSwiper>
+          <CustomSwiper
+            loop={true}
+            slidesPerView={3}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+                spaceBetween: 0
+              },
+              600: {
+                slidesPerView: 2,
+                spaceBetween: 10
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 15
+              }
+            }}
+          >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <SwiperSlide key={i}>
                 <AutoCard />
               </SwiperSlide>
             ))}
+          </CustomSwiper>
+        </Container>
+      </Box>
+      <Box sx={{ pt: 5, pb: 8, overflow: 'hidden' }}>
+        <Container maxWidth={isMd ? 'md' : 'lg'}>
+          <Typography variant="h4" align={'center'} mb={4}>
+            <b>Nuestros aliados</b>
+          </Typography>
+          <CustomSwiper
+            loop={true}
+            slidesPerView={6}
+            breakpoints={{
+              0: {
+                slidesPerView: 2,
+                spaceBetween: 10
+              },
+              600: {
+                slidesPerView: 4,
+                spaceBetween: 35
+              },
+              1024: {
+                slidesPerView: 6,
+                spaceBetween: 70
+              }
+            }}
+          >
+            {Array(8)
+              .fill(2)
+              .map((e, i) => (
+                <SwiperSlide key={i}>
+                  <Image
+                    src={'/img/brands/chery.png'}
+                    width={100}
+                    height={50}
+                    layout="responsive"
+                  />
+                </SwiperSlide>
+              ))}
           </CustomSwiper>
         </Container>
       </Box>
