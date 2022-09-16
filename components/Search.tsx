@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Container,
@@ -7,17 +7,18 @@ import {
   Grid,
   Button,
   Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Popper,
   TextField,
-  Grow
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  SelectChangeEvent,
+  MenuItem,
+  ListItemText
 } from '@mui/material'
-import ClickAwayListener from '@mui/base/ClickAwayListener'
 import SearchIcon from '@mui/icons-material/Search'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { grey } from '@mui/material/colors'
-import { SearchDropDownsTypes } from '../types/components'
+import { formSearchInitTypes, SearchTypes } from '../types/components'
 
 const StyledSearch = styled(Box)(({ theme }) => ({
   backgroundColor: grey[300],
@@ -33,70 +34,34 @@ const StyledSearch = styled(Box)(({ theme }) => ({
   }
 }))
 
-const StyledBtnDropdown = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.common.white,
-  display: 'flex',
-  justifyContent: 'space-between',
-  color: theme.palette.text.primary,
-  borderRadius: theme.spacing(1),
-  height: 56,
-  '&:hover': {
-    backgroundColor: `${theme.palette.common.white}b0`
-  }
+const StyledSelect = styled(FormControl)(({ theme }) => ({
+  width: '100%',
+  background: theme.palette.common.white,
+  borderRadius: theme.spacing(0.5)
 }))
 
-const StyledDropdown = styled(FormGroup)(({ theme }) => ({
-  backgroundColor: theme.palette.common.white,
-  padding: theme.spacing(2),
-  borderRadius: theme.spacing(1),
-  boxShadow: `0 5px 10px ${theme.palette.common.black}80`
-}))
-
-const dropDownsInit = {
-  type: {
-    anchorEl: null,
-    open: false,
-    width: 0
-  },
-  brand: {
-    anchorEl: null,
-    open: false,
-    width: 0
-  },
-  state: {
-    anchorEl: null,
-    open: false,
-    width: 0
-  }
-}
-
-// TODO: buscar el type del evento click
-
-interface SearchTypes {
-  title?: String | ReactNode
-  subTitle: String
-  onClick?: any
+const formInit = {
+  typeCar: [],
+  brandCar: [],
+  stateCar: [],
+  min: '',
+  max: ''
 }
 
 const Search = ({ title, subTitle, onClick }: SearchTypes) => {
-  const [dropDowns, setDropDowns] = useState<SearchDropDownsTypes>(dropDownsInit)
+  const [form, setForm] = useState<formSearchInitTypes>(formInit)
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, elemento: string) => {
-    setDropDowns({
-      ...dropDowns,
-      [elemento]: {
-        anchorEl: event.currentTarget,
-        open: !dropDowns[elemento as keyof SearchDropDownsTypes].open,
-        width: event.currentTarget.offsetWidth
-      }
-    })
+  const handleChange = (event: SelectChangeEvent<typeof form> | any, typeInput: string) => {
+    const {
+      target: { value }
+    } = event
+    console.log(value)
+    setForm({ ...form, [typeInput]: value })
   }
 
-  const closeAll = () => {
-    setDropDowns(dropDownsInit)
-  }
-
-  // TODO: cambiar los select por https://mui.com/material-ui/react-select/#main-content
+  const typesCar = ['Autos', 'Camionetas', 'Compactos', 'Deportivos', 'Motos']
+  const brandsCar = ['Audi', 'BMW', 'Brillance']
+  const statesCar = ['Nuevo', 'Usado']
 
   return (
     <StyledSearch>
@@ -110,141 +75,101 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
         <Typography variant="h5" mb={2.5}>
           {subTitle}
         </Typography>
-        <ClickAwayListener onClickAway={closeAll}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={4} lg={2}>
-              <StyledBtnDropdown
-                variant="text"
-                fullWidth
-                endIcon={
-                  <KeyboardArrowDownIcon
-                    sx={{
-                      transition: 'transform ease-in-out .2s',
-                      transform: dropDowns.type.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                    }}
-                  />
-                }
-                onClick={(e) => handleClick(e, 'type')}
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4} lg={2}>
+            <StyledSelect>
+              <InputLabel id="demo-multiple-checkbox-label">Tipo de vehículo</InputLabel>
+              <Select
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={form.typeCar}
+                onChange={(e) => handleChange(e, 'typeCar')}
+                renderValue={(selected) => selected.join(', ')}
+                input={<OutlinedInput label="Tipo de vehículo" />}
               >
-                Tipo de vehiculo
-              </StyledBtnDropdown>
-              <Popper
-                open={dropDowns.type.open}
-                anchorEl={dropDowns.type.anchorEl}
-                sx={{ width: dropDowns.type.width, zIndex: 19 }}
-                placement="bottom-start"
-                transition
-              >
-                {({ TransitionProps }) => (
-                  <Grow {...TransitionProps}>
-                    <StyledDropdown>
-                      <FormControlLabel control={<Checkbox />} label="Autos" />
-                      <FormControlLabel control={<Checkbox />} label="Camioneta" />
-                      <FormControlLabel control={<Checkbox />} label="Compacto" />
-                      <FormControlLabel control={<Checkbox />} label="Desportivo" />
-                      <FormControlLabel control={<Checkbox />} label="Moto" />
-                    </StyledDropdown>
-                  </Grow>
-                )}
-              </Popper>
-            </Grid>
-            <Grid item xs={12} sm={4} lg={2}>
-              <StyledBtnDropdown
-                variant="text"
-                fullWidth
-                endIcon={
-                  <KeyboardArrowDownIcon
-                    sx={{
-                      transition: 'transform ease-in-out .2s',
-                      transform: dropDowns.brand.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                    }}
-                  />
-                }
-                onClick={(e) => handleClick(e, 'brand')}
-              >
-                Marca
-              </StyledBtnDropdown>
-              <Popper
-                open={dropDowns.brand.open}
-                anchorEl={dropDowns.brand.anchorEl}
-                placement="bottom-start"
-                transition
-                sx={{ width: dropDowns.brand.width, zIndex: 19 }}
-              >
-                {({ TransitionProps }) => (
-                  <Grow {...TransitionProps}>
-                    <StyledDropdown>
-                      <FormControlLabel control={<Checkbox />} label="Audi" />
-                      <FormControlLabel control={<Checkbox />} label="BMW" />
-                      <FormControlLabel control={<Checkbox />} label="Brillance" />
-                      <FormControlLabel control={<Checkbox />} label="BYD" />
-                      <FormControlLabel control={<Checkbox />} label="Chana" />
-                    </StyledDropdown>
-                  </Grow>
-                )}
-              </Popper>
-            </Grid>
-            <Grid item xs={12} sm={4} lg={2}>
-              <StyledBtnDropdown
-                variant="text"
-                fullWidth
-                endIcon={
-                  <KeyboardArrowDownIcon
-                    sx={{
-                      transition: 'transform ease-in-out .2s',
-                      transform: dropDowns.state.open ? 'rotate(-180deg)' : 'rotate(0deg)'
-                    }}
-                  />
-                }
-                onClick={(e) => handleClick(e, 'state')}
-              >
-                Estado
-              </StyledBtnDropdown>
-              <Popper
-                open={dropDowns.state.open}
-                anchorEl={dropDowns.state.anchorEl}
-                sx={{ width: dropDowns.state.width, zIndex: 19 }}
-                placement="bottom-start"
-                transition
-              >
-                {({ TransitionProps }) => (
-                  <Grow {...TransitionProps}>
-                    <StyledDropdown>
-                      <FormControlLabel control={<Checkbox />} label="Nuevo" />
-                      <FormControlLabel control={<Checkbox />} label="Usado" />
-                    </StyledDropdown>
-                  </Grow>
-                )}
-              </Popper>
-            </Grid>
-            <Grid item xs={12} sm={8} lg={4}>
-              <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>
-                <TextField
-                  type={'number'}
-                  label="Min (Gs.)"
-                  sx={{ backgroundColor: '#fff', width: '100%' }}
-                />
-                <span>-</span>
-                <TextField
-                  type={'number'}
-                  label="Max (Gs.)"
-                  sx={{ backgroundColor: '#fff', width: '100%' }}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={4} lg={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{ height: 56 }}
-                onClick={onClick}
-              >
-                Buscar
-              </Button>
-            </Grid>
+                {typesCar.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    <Checkbox checked={form.typeCar.indexOf(type) > -1} />
+                    <ListItemText primary={type} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </StyledSelect>
           </Grid>
-        </ClickAwayListener>
+          <Grid item xs={12} sm={4} lg={2}>
+            <StyledSelect>
+              <InputLabel id="demo-multiple-checkbox-label">Marca</InputLabel>
+              <Select
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={form.brandCar}
+                onChange={(e) => handleChange(e, 'brandCar')}
+                renderValue={(selected) => selected.join(', ')}
+                input={<OutlinedInput label="Marca" />}
+              >
+                {brandsCar.map((brand) => (
+                  <MenuItem key={brand} value={brand}>
+                    <Checkbox checked={form.brandCar.indexOf(brand) > -1} />
+                    <ListItemText primary={brand} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </StyledSelect>
+          </Grid>
+          <Grid item xs={12} sm={4} lg={2}>
+            <StyledSelect>
+              <InputLabel id="demo-multiple-checkbox-label">Estado</InputLabel>
+              <Select
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={form.stateCar}
+                onChange={(e) => handleChange(e, 'stateCar')}
+                renderValue={(selected) => selected.join(', ')}
+                input={<OutlinedInput label="Estado" />}
+              >
+                {statesCar.map((state) => (
+                  <MenuItem key={state} value={state}>
+                    <Checkbox checked={form.stateCar.indexOf(state) > -1} />
+                    <ListItemText primary={state} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </StyledSelect>
+          </Grid>
+          <Grid item xs={12} sm={8} lg={4}>
+            <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>
+              <TextField
+                type={'number'}
+                label="Min (Gs.)"
+                sx={{ backgroundColor: '#fff', width: '100%' }}
+                onChange={(e) => handleChange(e, 'min')}
+                value={form.min}
+              />
+              <span>-</span>
+              <TextField
+                type={'number'}
+                label="Max (Gs.)"
+                sx={{ backgroundColor: '#fff', width: '100%' }}
+                onChange={(e) => handleChange(e, 'max')}
+                value={form.max}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4} lg={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ height: 55 }}
+              onClick={onClick}
+            >
+              Buscar
+            </Button>
+          </Grid>
+        </Grid>
       </Container>
     </StyledSearch>
   )

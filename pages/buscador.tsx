@@ -61,8 +61,8 @@ const buscador: NextPage = () => {
         <Grid container spacing={4}>
           {Array(12)
             .fill(1)
-            .map(() => (
-              <Grid item xs={12} sm={6} md={4}>
+            .map((e, i) => (
+              <Grid item xs={12} sm={6} md={4} key={i}>
                 <AutoCard />
               </Grid>
             ))}

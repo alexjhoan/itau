@@ -5,20 +5,16 @@ export interface CustomSwiperTypes extends SwiperProps {
   children: ReactNode
 }
 
-export interface SearchDropDownsTypes {
-  type: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
-  brand: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
-  state: {
-    anchorEl: null | HTMLElement
-    open: boolean
-    width: number
-  }
+export interface SearchTypes {
+  title?: String | ReactNode
+  subTitle: String
+  onClick?: any
+}
+
+export interface formSearchInitTypes {
+  typeCar: string[]
+  brandCar: string[]
+  stateCar: string[]
+  min: string
+  max: string
 }
