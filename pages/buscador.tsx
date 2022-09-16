@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -15,7 +14,7 @@ import React, { useState } from 'react'
 import AutoCard from '../components/AutoCard'
 import Search from '../components/Search'
 
-const buscador: NextPage = () => {
+const Buscador: NextPage = (): JSX.Element => {
   const [item, setItem] = useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -72,4 +71,4 @@ const buscador: NextPage = () => {
   )
 }
 
-export default buscador
+export default Buscador

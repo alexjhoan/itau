@@ -219,6 +219,7 @@ const Home: NextPage = () => {
                     width={100}
                     height={50}
                     layout="responsive"
+                    alt="..."
                   />
                 </SwiperSlide>
               ))}
