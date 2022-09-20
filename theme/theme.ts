@@ -40,7 +40,9 @@ const theme = responsiveFontSizes(
       MuiButton: {
         styleOverrides: {
           root: {
-            minHeight: 50
+            minHeight: 50,
+            minWidth: 150,
+            textTransform: 'capitalize'
           }
         }
       }

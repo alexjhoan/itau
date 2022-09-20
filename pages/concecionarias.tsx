@@ -1,7 +1,7 @@
 import React from 'react'
 
-const concecionarias = () => {
-  return <div>concecionarias</div>
+const Concecionarias = () => {
+  return <div>Concecionarias</div>
 }
 
-export default concecionarias
+export default Concecionarias

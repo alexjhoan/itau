@@ -1,7 +1,7 @@
 import React from 'react'
 
-const prestamos = () => {
-  return <div>prestamos</div>
+const Prestamos = () => {
+  return <div>Prestamos</div>
 }
 
-export default prestamos
+export default Prestamos

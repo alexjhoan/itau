@@ -6,19 +6,14 @@ import {
   Typography,
   Grid,
   Button,
-  Checkbox,
   TextField,
   FormControl,
-  InputLabel,
-  Select,
-  OutlinedInput,
-  SelectChangeEvent,
-  MenuItem,
-  ListItemText
+  SelectChangeEvent
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { grey } from '@mui/material/colors'
 import { formSearchInitTypes, SearchTypes } from '../types/components'
+import CustomSelect from './CustomSelect'
 
 const StyledSearch = styled(Box)(({ theme }) => ({
   backgroundColor: grey[300],
@@ -77,67 +72,28 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4} lg={2}>
-            <StyledSelect>
-              <InputLabel id="demo-multiple-checkbox-label">Tipo de vehículo</InputLabel>
-              <Select
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
-                multiple
-                value={form.typeCar}
-                onChange={(e) => handleChange(e, 'typeCar')}
-                renderValue={(selected) => selected.join(', ')}
-                input={<OutlinedInput label="Tipo de vehículo" />}
-              >
-                {typesCar.map((type) => (
-                  <MenuItem key={type} value={type}>
-                    <Checkbox checked={form.typeCar.indexOf(type) > -1} />
-                    <ListItemText primary={type} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </StyledSelect>
+            <CustomSelect
+              label={'Tipo de vehículo'}
+              listItems={typesCar}
+              value={form.typeCar}
+              onChange={(e: SelectChangeEvent) => handleChange(e, 'typeCar')}
+            />
           </Grid>
           <Grid item xs={12} sm={4} lg={2}>
-            <StyledSelect>
-              <InputLabel id="demo-multiple-checkbox-label">Marca</InputLabel>
-              <Select
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
-                multiple
-                value={form.brandCar}
-                onChange={(e) => handleChange(e, 'brandCar')}
-                renderValue={(selected) => selected.join(', ')}
-                input={<OutlinedInput label="Marca" />}
-              >
-                {brandsCar.map((brand) => (
-                  <MenuItem key={brand} value={brand}>
-                    <Checkbox checked={form.brandCar.indexOf(brand) > -1} />
-                    <ListItemText primary={brand} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </StyledSelect>
+            <CustomSelect
+              label={'Marca'}
+              listItems={brandsCar}
+              value={form.brandCar}
+              onChange={(e: SelectChangeEvent) => handleChange(e, 'brandCar')}
+            />
           </Grid>
           <Grid item xs={12} sm={4} lg={2}>
-            <StyledSelect>
-              <InputLabel id="demo-multiple-checkbox-label">Estado</InputLabel>
-              <Select
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
-                multiple
-                value={form.stateCar}
-                onChange={(e) => handleChange(e, 'stateCar')}
-                renderValue={(selected) => selected.join(', ')}
-                input={<OutlinedInput label="Estado" />}
-              >
-                {statesCar.map((state) => (
-                  <MenuItem key={state} value={state}>
-                    <Checkbox checked={form.stateCar.indexOf(state) > -1} />
-                    <ListItemText primary={state} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </StyledSelect>
+            <CustomSelect
+              label={'Estado'}
+              listItems={statesCar}
+              value={form.stateCar}
+              onChange={(e: SelectChangeEvent) => handleChange(e, 'stateCar')}
+            />
           </Grid>
           <Grid item xs={12} sm={8} lg={4}>
             <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>

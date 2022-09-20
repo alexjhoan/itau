@@ -1,7 +1,7 @@
 import React from 'react'
 
-const sucursales = () => {
-  return <div>sucursales</div>
+const Sucursales = () => {
+  return <div>Sucursales</div>
 }
 
-export default sucursales
+export default Sucursales
