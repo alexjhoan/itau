@@ -23,7 +23,7 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
 const contacto = () => {
   const { route } = useRouter()
   return (
-    <StyledStack>
+    <StyledStack id="contacto">
       <Container maxWidth={'lg'}>
         <Grid container spacing={2} py={10}>
           <Grid item xs={12} sm={7} md={6}>
