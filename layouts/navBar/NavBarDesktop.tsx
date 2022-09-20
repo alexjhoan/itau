@@ -12,7 +12,7 @@ const StyledNav = styled('ul')(({ theme }) => ({
   display: 'flex',
   listStyle: 'none',
   alignItems: 'center',
-  columnGap: theme.spacing(2),
+  columnGap: theme.spacing(3),
   '& li.logo': {
     lineHeight: 0
   },
