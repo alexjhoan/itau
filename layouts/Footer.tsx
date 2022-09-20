@@ -1,7 +1,7 @@
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Contacto from './Contacto'
-import { Box, Container, IconButton, styled, useTheme, Stack, Button } from '@mui/material'
+import { Box, Container, IconButton, useTheme, Stack } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'

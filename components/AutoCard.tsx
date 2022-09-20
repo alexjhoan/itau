@@ -1,15 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import {
-  styled,
-  Typography,
-  Card,
-  Stack,
-  IconButton,
-  useTheme,
-  useMediaQuery,
-  Box
-} from '@mui/material'
+import { styled, Typography, Card, Stack, IconButton, useTheme, useMediaQuery } from '@mui/material'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
 const StyledCard = styled(Card)(({ theme }) => ({

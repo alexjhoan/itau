@@ -5,7 +5,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper'
 import Search from '../components/Search'
-import { grey } from '@mui/material/colors'
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
@@ -136,24 +135,26 @@ const Home: NextPage = () => {
           </Fragment>
         }
       />
-      <Container maxWidth={'lg'}>
-        <Grid container spacing={4} my={5}>
-          {sectionLend.map((item, i) => (
-            <Grid item xs={12} sm={4} key={i}>
-              <StyledLendCard>
-                <Box className="iconItem">{item.icon}</Box>
-                <Typography variant="h5" align="center" gutterBottom>
-                  <b>{item.title}</b>
-                </Typography>
-                <Typography variant="body1" align="center">
-                  {item.text}
-                </Typography>
-              </StyledLendCard>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-      <Box sx={{ backgroundColor: grey[100], py: 8, overflow: 'hidden' }}>
+      <Box sx={{ backgroundColor: theme.palette.common.white }}>
+        <Container maxWidth={'lg'}>
+          <Grid container spacing={4} py={5} mt={0}>
+            {sectionLend.map((item, i) => (
+              <Grid item xs={12} sm={4} key={i}>
+                <StyledLendCard>
+                  <Box className="iconItem">{item.icon}</Box>
+                  <Typography variant="h5" align="center" gutterBottom>
+                    <b>{item.title}</b>
+                  </Typography>
+                  <Typography variant="body1" align="center">
+                    {item.text}
+                  </Typography>
+                </StyledLendCard>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+      <Box sx={{ py: 8, overflow: 'hidden' }}>
         <Container maxWidth={isMd ? 'md' : 'lg'}>
           <Typography variant="h4" align={'center'} gutterBottom>
             <b>¡Mirá las opciones que tenemos para ti!</b>
@@ -187,7 +188,7 @@ const Home: NextPage = () => {
           </CustomSwiper>
         </Container>
       </Box>
-      <Box sx={{ pt: 5, pb: 8, overflow: 'hidden' }}>
+      <Box sx={{ backgroundColor: theme.palette.common.white, pt: 5, pb: 8, overflow: 'hidden' }}>
         <Container maxWidth={isMd ? 'md' : 'lg'}>
           <Typography variant="h4" align={'center'} mb={4}>
             <b>Nuestros aliados</b>

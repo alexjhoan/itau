@@ -1,40 +1,12 @@
-import { Container, Stack, styled, Typography, Grid, Box, Button } from '@mui/material'
+import { Container, Stack, styled, Typography, Grid, Box } from '@mui/material'
 import React from 'react'
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk'
-import { grey } from '@mui/material/colors'
-import { FancyInput } from '../components/FancyInput'
+import { useRouter } from 'next/router'
+import CallMeForm from '../components/CallMeForm'
 
-const StyledStack = styled(Stack)(({ theme }) => ({
+const StyledStack = styled(Stack)(() => ({
   background: 'url(/img/contact-bg.jpg)',
   backgroundSize: 'cover',
   backgroundPosition: 'center'
-}))
-
-const StyledForm = styled(Box)(({ theme }) => ({
-  borderRadius: theme.spacing(2),
-  background: grey[50],
-  overflow: 'hidden',
-  '& .title': {
-    background: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-    padding: theme.spacing(1, 4),
-    display: 'flex',
-    alignItems: 'center',
-    columnGap: theme.spacing(1.5),
-    [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(1, 2)
-    }
-  },
-  '& .subTitle': {
-    maxWidth: 400,
-    marginBottom: theme.spacing(2)
-  },
-  '& form': {
-    padding: theme.spacing(2, 4, 4),
-    [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(2)
-    }
-  }
 }))
 
 const StyledSecondCol = styled(Box)(({ theme }) => ({
@@ -49,36 +21,13 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
 }))
 
 const contacto = () => {
+  const { route } = useRouter()
   return (
     <StyledStack>
       <Container maxWidth={'lg'}>
         <Grid container spacing={2} py={10}>
           <Grid item xs={12} sm={7} md={6}>
-            <StyledForm>
-              <Typography variant="h5" className="title">
-                <PhoneInTalkIcon sx={{ fontSize: 25 }} />
-                Quiero que me llamen
-              </Typography>
-              <Box component="form" noValidate autoComplete="off">
-                <Typography variant="body1" className="subTitle">
-                  Dejanos tus datos de contacto y te llamaremos para contarte más sobre Préstamo Mi
-                  Auto.
-                </Typography>
-                <FancyInput fullWidth error={false} type="text" label="Nombre:" helperText="" />
-                <FancyInput fullWidth error={false} type="email" label="Email:" helperText="" />
-                <FancyInput
-                  fullWidth
-                  error={false}
-                  type="text"
-                  label="Cédula(sin puntos ni guiones)"
-                  helperText=""
-                />
-                <FancyInput fullWidth error={false} type="tel" label="Tel:" helperText="" />
-                <Button variant="contained" color="primary" fullWidth={true}>
-                  enviar
-                </Button>
-              </Box>
-            </StyledForm>
+            {route != '/simulador' && <CallMeForm />}
           </Grid>
           <Grid
             item
