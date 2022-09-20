@@ -8,12 +8,52 @@ import {
   Stack,
   Slider,
   TextField,
-  Divider
+  Divider,
+  Tabs,
+  Tab,
+  useMediaQuery
 } from '@mui/material'
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import React, { useState } from 'react'
 import { NextPage } from 'next'
 import CallMeForm from '../components/CallMeForm'
+import { grey } from '@mui/material/colors'
+
+const dataBenefits = [
+  {
+    title: 'Financiación:',
+    content: 'hasta el 100% del valor del vehículo que elijas.'
+  },
+  {
+    title: 'Entrega:',
+    content: 'sin entrega inicial.'
+  },
+  {
+    title: 'Plazo:',
+    content: 'hasta 60 meses de plazo a sola firma.'
+  },
+  {
+    title: 'Monto mínimo de financiación:',
+    content: 'Gs. 20.000.000 o USD 4.000.'
+  },
+  {
+    title: 'Flexibilidad financiera:',
+    content: 'suma de ingresos del cónyuge.'
+  },
+
+  {
+    title: 'Seguro del vehículo:',
+    content: 'descuento promocional hasta el 25% sobre el valor de la póliza para vehículos 0 Km.'
+  },
+  {
+    title: 'Pago:',
+    content: 'débito automático de la cuota en tu cuenta corriente o caja de ahorro de Itaú.'
+  },
+  {
+    title: 'Nuevos clientes:',
+    content: 'al ser un nuevo cliente Itaú, tendrás acceso a los beneficios otorgados por el banco.'
+  }
+]
 
 const StyledBanner = styled(Box)(({ theme }) => ({
   backgroundImage: 'url(/img/simulator-bg.jpg)',
@@ -35,16 +75,55 @@ const StyledCalculation = styled(Box)(({ theme }) => ({
   }
 }))
 
-const StyledSlider = styled(Box)(({ theme }) => ({
-  '& .MuiSlider-root': {
-    padding: theme.spacing(0, 1)
+const StyledTabsNav = styled(Box)(({ theme }) => ({
+  '& .MuiTab-root': {
+    minWidth: theme.spacing(25),
+    backgroundColor: grey[300],
+    color: grey[600],
+    textTransform: 'capitalize',
+    fontSize: 20,
+    '&:first-of-type': {
+      borderStartStartRadius: theme.spacing(2)
+    },
+    '&:last-of-type': {
+      borderStartEndRadius: theme.spacing(2)
+    },
+    '&.Mui-selected': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white
+    },
+    [theme.breakpoints.down('sm')]: {
+      minWidth: 145,
+      fontSize: 16
+    }
+  },
+  '& .MuiTabs-indicator': {
+    display: 'none'
+  }
+}))
+
+const StyledTabsContent = styled(Box)(({ theme }) => ({
+  border: `solid 1px ${theme.palette.primary.main}`,
+  borderRadius: theme.spacing(0, 0, 2, 2),
+  padding: theme.spacing(4, 3),
+  backgroundColor: theme.palette.common.white,
+  '& ul': {
+    paddingLeft: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: '16px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2)
   }
 }))
 
 const Simulador: NextPage = () => {
   const theme = useTheme()
+  const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const [amount, setAmount] = useState<number>(0)
   const [month, setMonth] = useState<number>(0)
+  const [tab, setTab] = useState<number>(0)
 
   const handleChange = (event: Event, newAmount: number | number[]) => {
     setAmount(newAmount as number)
@@ -52,6 +131,10 @@ const Simulador: NextPage = () => {
 
   const handleChangeMonth = (event: Event, newMonth: number | number[]) => {
     setMonth(newMonth as number)
+  }
+
+  const changeTab = (event: React.SyntheticEvent, newValue: number) => {
+    setTab(newValue)
   }
 
   return (
@@ -75,11 +158,18 @@ const Simulador: NextPage = () => {
                 </Typography>
               </Box>
               <Box p={2}>
-                <StyledSlider>
+                <Box>
                   <Typography variant="body2" sx={{ mb: -2 }}>
                     Monto que necesito (Gs.)
                   </Typography>
-                  <Stack spacing={2} direction="row" alignItems="center">
+                  <Stack
+                    spacing={2}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent={'center'}
+                    flexWrap={isXs ? 'wrap' : 'nowrap'}
+                    pb={isXs ? 4 : 0}
+                  >
                     <Slider
                       aria-label="Volume"
                       value={amount}
@@ -95,12 +185,19 @@ const Simulador: NextPage = () => {
                       disabled
                     />
                   </Stack>
-                </StyledSlider>
-                <StyledSlider>
+                </Box>
+                <Box>
                   <Typography variant="body2" sx={{ mb: -2 }}>
                     Plazo del préstamos (meses)
                   </Typography>
-                  <Stack spacing={2} direction="row" alignItems="center">
+                  <Stack
+                    spacing={2}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent={'center'}
+                    flexWrap={isXs ? 'wrap' : 'nowrap'}
+                    pb={isXs ? 4 : 0}
+                  >
                     <Slider
                       aria-label="Volume"
                       value={month}
@@ -110,8 +207,12 @@ const Simulador: NextPage = () => {
                     />
                     <TextField id="outlined-name" hiddenLabel value={month} disabled />
                   </Stack>
-                </StyledSlider>
-                <Stack spacing={3} direction="row" justifyContent={'space-between'}>
+                </Box>
+                <Stack
+                  spacing={3}
+                  direction={isXs ? 'column' : 'row'}
+                  justifyContent={'space-between'}
+                >
                   <Box>
                     <Typography variant="body2" color="textSecondary">
                       Cantidad de cuotas:
@@ -124,15 +225,20 @@ const Simulador: NextPage = () => {
                     <Typography variant="body2" color="textSecondary">
                       Cantidad de cuotas:
                     </Typography>
-                    <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }} align="right">
+                    <Typography
+                      variant="h5"
+                      color="primary"
+                      sx={{ fontWeight: 700 }}
+                      align={isXs ? 'left' : 'right'}
+                    >
                       Gs.{' '}
                       {amount != 0 && month != 0 ? (amount / month).toLocaleString() : '00.000.000'}
                     </Typography>
                     <Typography
                       variant="body1"
-                      align="right"
                       color="primary"
                       sx={{ fontWeight: 700 }}
+                      align={isXs ? 'left' : 'right'}
                     >
                       IVA incluido
                     </Typography>
@@ -143,7 +249,34 @@ const Simulador: NextPage = () => {
               <CallMeForm isFooter={false} />
             </StyledCalculation>
           </Grid>
-          <Grid item xs={12} md={6} lg={7}></Grid>
+          <Grid item xs={12} md={6} lg={7}>
+            <StyledTabsNav>
+              <Tabs value={tab} onChange={changeTab}>
+                <Tab label="Beneficios" />
+                <Tab label="Requisitos" />
+              </Tabs>
+            </StyledTabsNav>
+            <StyledTabsContent hidden={tab !== 0}>
+              <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                Características y beneficios
+              </Typography>
+              <ul>
+                {dataBenefits.map((item, i) => (
+                  <li key={i}>
+                    <Typography variant="body1">
+                      <b>{item.title} </b>
+                      {item.content}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            </StyledTabsContent>
+            <StyledTabsContent hidden={tab !== 1}>
+              <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                Requisitos
+              </Typography>
+            </StyledTabsContent>
+          </Grid>
         </Grid>
       </Container>
     </Box>
