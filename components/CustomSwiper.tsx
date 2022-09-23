@@ -1,10 +1,12 @@
-import React, { useRef } from 'react'
-import { Swiper } from 'swiper/react'
+import React, { useRef, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { Navigation } from 'swiper'
+import 'swiper/css/thumbs'
+import { Navigation, Thumbs } from 'swiper'
 import { CustomSwiperTypes } from '../types/components'
 import { Box, styled, IconButton } from '@mui/material'
+import Image from 'next/image'
 
 const SwiperBtnStyled = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
@@ -42,7 +44,7 @@ const SwiperBtnStyled = styled(IconButton)(({ theme }) => ({
   }
 }))
 
-const CustomSwiper = ({ children, ...rest }: CustomSwiperTypes): JSX.Element => {
+export const CustomSwiper = ({ children, ...rest }: CustomSwiperTypes): JSX.Element => {
   const navigationPrevRef = useRef<HTMLDivElement>(null)
   const navigationNextRef = useRef<HTMLDivElement>(null)
   return (
@@ -71,4 +73,77 @@ const CustomSwiper = ({ children, ...rest }: CustomSwiperTypes): JSX.Element => 
   )
 }
 
-export default CustomSwiper
+const StyledThumbsSwiper = styled(Box)(({ theme }) => ({
+  '& .bannerSwiper': {
+    '& .swiper-button-prev, .swiper-button-next': {
+      color: theme.palette.common.white,
+      '&:after': {
+        fontSize: 30,
+        textShadow: '0px 3px 3px #0008'
+      }
+    }
+  },
+  '& .thumbsSwiper': {
+    '& .swiper-slide': {
+      filter: 'grayscale(0.8)',
+      opacity: 0.6,
+      '&.swiper-slide-thumb-active': {
+        filter: ' none',
+        opacity: 1
+      }
+    },
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
+  }
+}))
+
+export const CustomThumbsSwiper = ({ imageList }: any) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null)
+
+  return (
+    <StyledThumbsSwiper>
+      <Swiper
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+        modules={[Navigation, Thumbs]}
+        className="bannerSwiper"
+      >
+        {imageList.map((item: any, i: any) => (
+          <SwiperSlide key={i}>
+            <Image
+              src={'/img/autos/prueba.png'}
+              width={670}
+              height={360}
+              layout="responsive"
+              alt="..."
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={10}
+        slidesPerView={4}
+        watchSlidesProgress={true}
+        modules={[Navigation, Thumbs]}
+        className="thumbsSwiper"
+      >
+        {imageList.map((item: any, i: any) => (
+          <SwiperSlide key={i}>
+            <Image
+              src={'/img/autos/prueba.png'}
+              width={670}
+              height={360}
+              layout="responsive"
+              alt="..."
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </StyledThumbsSwiper>
+  )
+}
