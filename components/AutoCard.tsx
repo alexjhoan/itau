@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { styled, Typography, Card, Stack, IconButton, useTheme, useMediaQuery } from '@mui/material'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { useRouter } from 'next/router'
 
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: 0,
@@ -23,7 +24,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   }
 }))
 
-const AutoCard = () => {
+const AutoCard = ({ id }: any) => {
+  const router = useRouter()
   const theme = useTheme()
   const isMd = useMediaQuery(theme.breakpoints.down('lg'))
 
@@ -51,7 +53,7 @@ const AutoCard = () => {
         <IconButton
           className={'iconRedirect'}
           onClick={() => {
-            console.log('first')
+            router.push(`/auto/${id}`)
           }}
         >
           <ChevronRightIcon />

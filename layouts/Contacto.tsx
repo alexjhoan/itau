@@ -22,12 +22,14 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
 
 const contacto = () => {
   const { route } = useRouter()
+  console.log(route)
+
   return (
     <StyledStack id="contacto">
       <Container maxWidth={'lg'}>
         <Grid container spacing={2} py={10}>
           <Grid item xs={12} sm={7} md={6}>
-            {route != '/simulador' && <CallMeForm />}
+            {!route.includes('simulador') && !route.includes('auto') && <CallMeForm />}
           </Grid>
           <Grid
             item

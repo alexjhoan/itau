@@ -62,7 +62,7 @@ const Buscador: NextPage = (): JSX.Element => {
             .fill(1)
             .map((e, i) => (
               <Grid item xs={12} sm={6} md={4} key={i}>
-                <AutoCard />
+                <AutoCard id={i} />
               </Grid>
             ))}
         </Grid>

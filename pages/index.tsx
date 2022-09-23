@@ -182,7 +182,7 @@ const Home: NextPage = () => {
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <SwiperSlide key={i}>
-                <AutoCard />
+                <AutoCard id={i} />
               </SwiperSlide>
             ))}
           </CustomSwiper>
