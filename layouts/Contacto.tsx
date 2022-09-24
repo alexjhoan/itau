@@ -22,7 +22,6 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
 
 const contacto = () => {
   const { route } = useRouter()
-  console.log(route)
 
   return (
     <StyledStack id="contacto">

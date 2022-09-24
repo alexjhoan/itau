@@ -75,6 +75,7 @@ export const CustomSwiper = ({ children, ...rest }: CustomSwiperTypes): JSX.Elem
 
 const StyledThumbsSwiper = styled(Box)(({ theme }) => ({
   '& .bannerSwiper': {
+    marginBottom: theme.spacing(2),
     '& .swiper-button-prev, .swiper-button-next': {
       color: theme.palette.common.white,
       '&:after': {
@@ -87,6 +88,7 @@ const StyledThumbsSwiper = styled(Box)(({ theme }) => ({
     '& .swiper-slide': {
       filter: 'grayscale(0.8)',
       opacity: 0.6,
+      cursor: 'pointer',
       '&.swiper-slide-thumb-active': {
         filter: ' none',
         opacity: 1
@@ -127,7 +129,7 @@ export const CustomThumbsSwiper = ({ imageList }: any) => {
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={10}
-        slidesPerView={4}
+        slidesPerView={5}
         watchSlidesProgress={true}
         modules={[Navigation, Thumbs]}
         className="thumbsSwiper"
