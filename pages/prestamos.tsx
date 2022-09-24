@@ -1,8 +1,21 @@
-import { Box, styled, Tab, Tabs, Grid, Typography } from '@mui/material'
+import {
+  Box,
+  styled,
+  Tab,
+  Tabs,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  useTheme,
+  useMediaQuery
+} from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { dataBenefits, dataRequirements } from '../utils/data'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { useRouter } from 'next/router'
 
 const StyledBanner = styled(Box)(({ theme }) => ({
   height: 300,
@@ -53,51 +66,118 @@ const StyledTabsContent = styled(Box)(({ theme }) => ({
   }
 }))
 
-const Prestamos: NextPage = () => {
+const ResponsiveTabs = ({ contentTab }: any): JSX.Element => {
   const [tab, setTab] = useState<number>(0)
+  const [expanded, setExpanded] = useState<string | false>('panel0')
+  const theme = useTheme()
+  const isSm = useMediaQuery(theme.breakpoints.down('md'))
+  const { asPath } = useRouter()
+
+  useEffect(() => {
+    if (asPath.includes('#requisitos')) {
+      setTab(1)
+      setExpanded('panel1')
+    } else {
+      setTab(0)
+      setExpanded('panel0')
+    }
+  }, [asPath])
+
+  const handleExpanded = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+    setExpanded(newExpanded ? panel : false)
+  }
 
   const changeTab = (event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue)
   }
   return (
     <>
+      {isSm ? (
+        contentTab.map((item: any, i: any) => (
+          <Accordion
+            expanded={expanded === `panel${i}`}
+            onChange={handleExpanded(`panel${i}`)}
+            elevation={0}
+            disableGutters
+            key={i}
+          >
+            <AccordionSummary
+              sx={{ backgroundColor: theme.palette.secondary.main }}
+              expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.secondary.contrastText }} />}
+            >
+              <Typography variant="h5" sx={{ color: theme.palette.secondary.contrastText }}>
+                {item.title}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>{item.content}</AccordionDetails>
+          </Accordion>
+        ))
+      ) : (
+        <Box sx={{ flexGrow: 1, bgcolor: 'common.white', display: 'flex' }}>
+          <StyledTabsNav orientation="vertical" value={tab} onChange={changeTab}>
+            {contentTab.map((item: any, i: any) => (
+              <Tab label={item.title} key={i} />
+            ))}
+          </StyledTabsNav>
+          {contentTab.map((item: any, i: any) => (
+            <StyledTabsContent hidden={tab !== i} key={i}>
+              {item.content}
+            </StyledTabsContent>
+          ))}
+        </Box>
+      )}
+    </>
+  )
+}
+
+const Prestamos: NextPage = () => {
+  return (
+    <>
       <StyledBanner />
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}>
-        <StyledTabsNav orientation="vertical" value={tab} onChange={changeTab}>
-          <Tab label="Beneficios" />
-          <Tab label="Requisitos" />
-        </StyledTabsNav>
-        <StyledTabsContent hidden={tab !== 0}>
-          <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
-            Características y beneficios
-          </Typography>
-          <ul>
-            {dataBenefits.map((item, i) => (
-              <li key={i}>
-                <Typography variant="body1">
-                  <b>{item.title} </b>
-                  {item.content}
+      <ResponsiveTabs
+        contentTab={[
+          {
+            title: 'Beneficios',
+            content: (
+              <>
+                <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                  Características y beneficios
                 </Typography>
-              </li>
-            ))}
-          </ul>
-        </StyledTabsContent>
-        <StyledTabsContent hidden={tab !== 1}>
-          <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
-            Requisitos
-          </Typography>
-          <ul>
-            {dataRequirements.map((item, i) => (
-              <li key={i}>
-                <Typography variant="body1">{item}</Typography>
-              </li>
-            ))}
-          </ul>
-          <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
-            Sujeto a verificación y aprobación crediticia por parte del banco.
-          </Typography>
-        </StyledTabsContent>
-      </Box>
+                <ul>
+                  {dataBenefits.map((item, i) => (
+                    <li key={i}>
+                      <Typography variant="body1">
+                        <b>{item.title} </b>
+                        {item.content}
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )
+          },
+          {
+            title: 'Requisitos',
+            content: (
+              <>
+                <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                  Requisitos
+                </Typography>
+                <ul>
+                  {dataRequirements.map((item, i) => (
+                    <li key={i}>
+                      <Typography variant="body1">{item}</Typography>
+                    </li>
+                  ))}
+                </ul>
+                <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+                  Sujeto a verificación y aprobación crediticia por parte del banco.
+                </Typography>
+              </>
+            )
+          }
+        ]}
+      />
     </>
   )
 }

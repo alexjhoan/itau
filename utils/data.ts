@@ -1,4 +1,9 @@
-export const dataBenefits = [
+interface dataBenefitsTypes {
+  title: string
+  content: string
+}
+
+export const dataBenefits: dataBenefitsTypes[] = [
   {
     title: 'Financiación:',
     content: 'hasta el 100% del valor del vehículo que elijas.'
@@ -34,7 +39,7 @@ export const dataBenefits = [
   }
 ]
 
-export const dataRequirements = [
+export const dataRequirements: string[] = [
   'Documento de identidad.',
   'Comprobante de domicilio (cuenta de agua, electricidad, gas o teléfono)',
   'Comprobante de ingresos con un máximo de fecha de 60 días. Si el solicitante es contribuyente del IVA deberá presentar su declaración jurada de los últimos seis meses',
