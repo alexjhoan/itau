@@ -3,42 +3,7 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { grey } from '@mui/material/colors'
 import CalculationLoan from '../components/CalculationLoan'
-
-const dataBenefits = [
-  {
-    title: 'Financiación:',
-    content: 'hasta el 100% del valor del vehículo que elijas.'
-  },
-  {
-    title: 'Entrega:',
-    content: 'sin entrega inicial.'
-  },
-  {
-    title: 'Plazo:',
-    content: 'hasta 60 meses de plazo a sola firma.'
-  },
-  {
-    title: 'Monto mínimo de financiación:',
-    content: 'Gs. 20.000.000 o USD 4.000.'
-  },
-  {
-    title: 'Flexibilidad financiera:',
-    content: 'suma de ingresos del cónyuge.'
-  },
-
-  {
-    title: 'Seguro del vehículo:',
-    content: 'descuento promocional hasta el 25% sobre el valor de la póliza para vehículos 0 Km.'
-  },
-  {
-    title: 'Pago:',
-    content: 'débito automático de la cuota en tu cuenta corriente o caja de ahorro de Itaú.'
-  },
-  {
-    title: 'Nuevos clientes:',
-    content: 'al ser un nuevo cliente Itaú, tendrás acceso a los beneficios otorgados por el banco.'
-  }
-]
+import { dataBenefits, dataRequirements } from '../utils/data'
 
 const StyledBanner = styled(Box)(({ theme }) => ({
   backgroundImage: 'url(/img/simulator-bg.jpg)',
@@ -138,6 +103,16 @@ const Simulador: NextPage = () => {
             <StyledTabsContent hidden={tab !== 1}>
               <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
                 Requisitos
+              </Typography>
+              <ul>
+                {dataRequirements.map((item, i) => (
+                  <li key={i}>
+                    <Typography variant="body1">{item}</Typography>
+                  </li>
+                ))}
+              </ul>
+              <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+                Sujeto a verificación y aprobación crediticia por parte del banco.
               </Typography>
             </StyledTabsContent>
           </Grid>
