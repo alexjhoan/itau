@@ -21,14 +21,15 @@ const brandsCar = ['Audi', 'BMW', 'Brillance']
 const feature = [
   'motor',
   'combustible',
-  'transmicíon',
+  'transmisíon',
   'neumáticos',
   'vidrios',
   'airbag',
   'A/A',
-  'autdio',
+  'audio',
   'garantia',
-  'cap. carga'
+  'cap. carga',
+  'tracción'
 ]
 
 const formInit = {

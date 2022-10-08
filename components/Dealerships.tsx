@@ -10,7 +10,7 @@ const brandsCar = ['Audi', 'BMW', 'Brillance']
 
 const DealerCars = () => {
   const { route } = useRouter()
-  const [filter, setFilter] = useState({ branch: [], departament: [] })
+  const [filter, setFilter] = useState({ branch: [], category: [] })
   const handleChange = (event: SelectChangeEvent<typeof filter> | any, typeInput: string) => {
     const {
       target: { value }
@@ -44,10 +44,10 @@ const DealerCars = () => {
             <Grid item xs={12} md={6}>
               <Stack spacing={2}>
                 <CustomSelect
-                  label={'Departamento'}
+                  label={'Categorías'}
                   listItems={brandsCar}
-                  value={filter.departament}
-                  onChange={(e: SelectChangeEvent) => handleChange(e, 'departament')}
+                  value={filter.category}
+                  onChange={(e: SelectChangeEvent) => handleChange(e, 'category')}
                 />
               </Stack>
             </Grid>
