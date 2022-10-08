@@ -27,12 +27,12 @@ const links: linksTypes[] = [
     name: 'Comparador'
   },
   {
-    url: '/concecionarias',
-    name: 'Concecionarias'
+    url: '/concesionarias',
+    name: 'Concesionarias'
   },
   {
     url: '/prestamos',
-    name: 'Prestamos',
+    name: 'Préstamos',
     subMenu: [
       {
         url: '#beneficios',

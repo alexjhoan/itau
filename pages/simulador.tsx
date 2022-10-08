@@ -115,6 +115,10 @@ const Simulador: NextPage = () => {
                 Sujeto a verificación y aprobación crediticia por parte del banco.
               </Typography>
             </StyledTabsContent>
+            <Typography variant="body1" sx={{ mt: 4 }}>
+              * Actualmente el simulador está disponible solamente para calcular autos 0km,
+              proximamente se habilitarán las demás opciones de vehículos.
+            </Typography>
           </Grid>
         </Grid>
       </Container>

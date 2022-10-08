@@ -92,8 +92,8 @@ const sectionLend = [
   },
   {
     icon: <RequestQuoteIcon />,
-    title: 'Uso consciente del dinero',
-    text: 'Para elegir tu auto evaluá y compará los precios y las mejores opciones, contá con tu asesor quien te guiará para definir el plazo y capital que más te convenga.'
+    title: 'Hace una compra inteligente',
+    text: 'Para elegir tu auto evalúa y compara precios, prestaciones. Consulta con tu Oficial para definir el mejor plan, acorde al plazo y capital que sea adapte a tus ingresos.'
   }
 ]
 
@@ -157,10 +157,10 @@ const Home: NextPage = () => {
       <Box sx={{ py: 8, overflow: 'hidden' }}>
         <Container maxWidth={isMd ? 'md' : 'lg'}>
           <Typography variant="h4" align={'center'} gutterBottom>
-            <b>¡Mirá las opciones que tenemos para ti!</b>
+            <b>¡Mirá las opciones que tenemos para vos!</b>
           </Typography>
           <Typography variant="h6" align={'center'} mb={4}>
-            Financiación hasta el 100% del valor del vehículo 0km que elijas
+            Financiación hasta el 100% del valor del vehículo que elijas hasta 60 meses de plazo.
           </Typography>
           <CustomSwiper
             loop={true}

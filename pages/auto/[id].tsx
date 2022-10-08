@@ -52,12 +52,12 @@ const Auto = () => {
   const feature = [
     'motor',
     'combustible',
-    'transmicíon',
+    'transmisíon',
     'neumáticos',
     'vidrios',
     'airbag',
     'A/A',
-    'autdio',
+    'audio',
     'garantia',
     'cap. carga',
     'tracción'

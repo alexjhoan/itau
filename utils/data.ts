@@ -9,8 +9,9 @@ export const dataBenefits: dataBenefitsTypes[] = [
     content: 'hasta el 100% del valor del vehículo que elijas.'
   },
   {
-    title: 'Entrega:',
-    content: 'sin entrega inicial.'
+    title: 'Armá tu plan:',
+    content:
+      'podés elegir financiar con o sin entrega, con y sin refuerzos anuales. Podés negociar la entrega de tu usado en la concesionaria y financiar el saldo.'
   },
   {
     title: 'Plazo:',
@@ -27,7 +28,7 @@ export const dataBenefits: dataBenefitsTypes[] = [
 
   {
     title: 'Seguro del vehículo:',
-    content: 'descuento promocional hasta el 25% sobre el valor de la póliza para vehículos 0 Km.'
+    content: 'tenés varias opciones vía Itaú Corredores de Seguros.'
   },
   {
     title: 'Pago:',
@@ -35,7 +36,13 @@ export const dataBenefits: dataBenefitsTypes[] = [
   },
   {
     title: 'Nuevos clientes:',
-    content: 'al ser un nuevo cliente Itaú, tendrás acceso a los beneficios otorgados por el banco.'
+    content:
+      'accederás a todos los beneficios del Banco con la cuenta que te abriremos para el pago de tus cuotas.'
+  },
+  {
+    title: 'Desembolso:',
+    content:
+      'transferimos el valor del préstamo directamente a la cuenta de la concesionaria evitándote trámites innecesarios.'
   }
 ]
 

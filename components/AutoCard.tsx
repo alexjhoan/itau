@@ -43,8 +43,8 @@ const AutoCard = ({ id }: any) => {
       />
       <Stack direction="row" justifyContent="space-between" alignItems="center" px={2} py={1}>
         <div>
-          <Typography color="text.secondary" mb={-1}>
-            Desde
+          <Typography color="text.secondary" variant="body2" mb={-0.5}>
+            Cuota aproximada
           </Typography>
           <Typography variant={isMd ? 'h5' : 'h4'}>
             <b>Gs. 000.000.000</b>

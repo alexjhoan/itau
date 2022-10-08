@@ -21,9 +21,9 @@ const DealerCars = () => {
     <>
       <Box sx={{ backgroundColor: grey[300], py: 4 }}>
         <Container maxWidth="lg">
-          {!route.includes('concecionarias') ? (
+          {!route.includes('concesionarias') ? (
             <Typography variant="h5" pb={2} sx={{ fontWeight: 700 }}>
-              Concecionarias
+              Concesionarias
             </Typography>
           ) : (
             <Typography variant="h6" pb={2}>
@@ -78,7 +78,7 @@ const DealerCars = () => {
                     color="primary"
                     sx={{ fontSize: 30, verticalAlign: 'bottom', mr: 1 }}
                   />
-                  Nombre Concecionario
+                  Nombre Concesionario
                 </Typography>
                 <Typography variant="body2">Dirección: Lorem ipsum dolor sit amet.</Typography>
                 <Typography variant="body2">Teléfono:</Typography>

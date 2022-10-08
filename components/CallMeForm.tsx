@@ -72,6 +72,9 @@ const CallMeForm = ({ isFooter = true }: CallMeFormTypes) => {
         <Button variant="contained" color="primary" fullWidth={true}>
           Enviar
         </Button>
+        <Typography variant="h6" mt={2}>
+          Contacto: 0981 634 175
+        </Typography>
       </Box>
     </StyledForm>
   )

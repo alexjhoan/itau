@@ -54,7 +54,7 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
     setForm({ ...form, [typeInput]: value })
   }
 
-  const typesCar = ['Autos', 'Camionetas', 'Compactos', 'Deportivos', 'Motos']
+  const typesCar = ['Autos', 'Suv', 'Pick Up', 'Van', 'Utilitarios', 'Motos', 'Embarcación']
   const brandsCar = ['Audi', 'BMW', 'Brillance']
   const statesCar = ['Nuevo', 'Usado']
 

@@ -2,8 +2,8 @@ import { NextPage } from 'next'
 import React from 'react'
 import DealerCars from '../components/Dealerships'
 
-const Concecionarias: NextPage = () => {
+const Concesionarias: NextPage = () => {
   return <DealerCars />
 }
 
-export default Concecionarias
+export default Concesionarias
