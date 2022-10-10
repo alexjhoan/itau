@@ -14,7 +14,7 @@ import React, { useState } from 'react'
 import AutoCard from '../components/AutoCard'
 import Search from '../components/Search'
 
-const Buscador: NextPage = (): JSX.Element => {
+const Buscador: NextPage = () => {
   const [item, setItem] = useState('')
 
   const handleChange = (event: SelectChangeEvent) => {

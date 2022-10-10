@@ -20,7 +20,7 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
   }
 }))
 
-const contacto = () => {
+const Contacto = () => {
   const { route } = useRouter()
 
   return (
@@ -51,4 +51,4 @@ const contacto = () => {
   )
 }
 
-export default contacto
+export default Contacto
