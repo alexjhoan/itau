@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { grey } from '@mui/material/colors'
 import PlaceIcon from '@mui/icons-material/Place'
 import { useRouter } from 'next/router'
+import { dataLeaderships } from '../utils/data'
 
 const typesCar = ['Autos', 'Camionetas', 'Compactos', 'Deportivos', 'Motos']
 const brandsCar = ['Audi', 'BMW', 'Brillance']
@@ -65,27 +66,21 @@ const DealerCars = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
         <Grid container spacing={4} sx={{ pt: 4 }}>
-          {Array(12)
-            .fill(1)
-            .map((item, i) => (
-              <Grid item xs={12} sm={6} md={4} key={i}>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 700, textTransform: 'uppercase' }}
-                  gutterBottom
-                >
-                  <PlaceIcon
-                    color="primary"
-                    sx={{ fontSize: 30, verticalAlign: 'bottom', mr: 1 }}
-                  />
-                  Nombre Concesionario
-                </Typography>
-                <Typography variant="body2">Dirección: Lorem ipsum dolor sit amet.</Typography>
-                <Typography variant="body2">Teléfono:</Typography>
-                <Typography variant="body2">Web: www.nombreconcecionario.com.py </Typography>
-                <Typography variant="body2">Mail: </Typography>
-              </Grid>
-            ))}
+          {dataLeaderships.map((item, i) => (
+            <Grid item xs={12} sm={6} md={4} key={i}>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 700, textTransform: 'uppercase' }}
+                gutterBottom
+              >
+                <PlaceIcon color="primary" sx={{ fontSize: 30, verticalAlign: 'bottom', mr: 1 }} />
+                {item.name}
+                {item.brand && ` - ${item.brand}`}
+              </Typography>
+              <Typography variant="body2">Dirección: {item.address}</Typography>
+              <Typography variant="body2">Teléfono: {item.tel}</Typography>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>
