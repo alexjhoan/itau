@@ -19,12 +19,11 @@ const StyledSearch = styled(Box)(({ theme }) => ({
   backgroundColor: grey[300],
   padding: theme.spacing(5, 0),
   '& .title': {
-    display: 'flex',
-    alignItems: 'center',
-    columnGap: theme.spacing(1),
     marginBottom: theme.spacing(3.5),
     '& .MuiSvgIcon-root': {
-      fontSize: 40
+      fontSize: 40,
+      verticalAlign: 'middle',
+      marginRight: theme.spacing(1)
     }
   }
 }))

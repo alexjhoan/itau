@@ -99,7 +99,7 @@ const CalculationLoan = () => {
               Cantidad de cuotas:
             </Typography>
             <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }}>
-              {month} Coutas
+              {month} Cuotas
             </Typography>
           </Box>
           <Box>
