@@ -24,16 +24,28 @@ const Footer = () => {
             <Typography variant="body1" sx={{ color: theme.palette.common.white }} mr={1}>
               Seguínos
             </Typography>
-            <IconButton component={'a'} href={'#'}>
+            <IconButton
+              component={'a'}
+              href={'https://www.facebook.com/itauparaguay/'}
+              target="_blank"
+            >
               <FacebookIcon sx={styleIcon} />
             </IconButton>
-            <IconButton component={'a'} href={'#'}>
+            <IconButton component={'a'} href={'https://twitter.com/itauparaguay'} target="_blank">
               <TwitterIcon sx={styleIcon} />
             </IconButton>
-            <IconButton component={'a'} href={'#'}>
+            <IconButton
+              component={'a'}
+              href={'https://www.instagram.com/itauparaguay/'}
+              target="_blank"
+            >
               <InstagramIcon sx={styleIcon} />
             </IconButton>
-            <IconButton component={'a'} href={'#'}>
+            <IconButton
+              component={'a'}
+              href={'https://www.youtube.com/c/itauparaguay'}
+              target="_blank"
+            >
               <YouTubeIcon sx={styleIcon} />
             </IconButton>
           </Stack>

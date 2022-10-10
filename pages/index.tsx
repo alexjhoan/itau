@@ -92,8 +92,8 @@ const sectionLend = [
   },
   {
     icon: <RequestQuoteIcon />,
-    title: 'Hace una compra inteligente',
-    text: 'Para elegir tu auto evalúa y compara precios, prestaciones. Consulta con tu Oficial para definir el mejor plan, acorde al plazo y capital que sea adapte a tus ingresos.'
+    title: 'Hacé una compra inteligente',
+    text: 'Para elegir tu auto, evalúa y compara precios y prestaciones.'
   }
 ]
 
