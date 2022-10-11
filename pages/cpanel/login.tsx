@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { NextPage } from 'next'
 import { FancyInput } from '../../components/FancyInput'
 import { grey } from '@mui/material/colors'
+import { useState } from 'react'
 
 const StyledLogin = styled(Box)(() => ({
   display: 'flex',
@@ -35,10 +36,14 @@ const StyledForm = styled(Card)(({ theme }) => ({
   '& .loginLink': {
     color: theme.palette.text.primary,
     textDecoration: 'none'
+  },
+  '& .btnChange': {
+    color: theme.palette.text.primary
   }
 }))
 
 const Login: NextPage = () => {
+  const [hiddeForm, setHiddeForm] = useState<number>(1)
   return (
     <StyledLogin>
       <StyledForm sx={{ maxWidth: 450 }}>
@@ -47,7 +52,7 @@ const Login: NextPage = () => {
           <Typography variant="h5" color="secondary" sx={{ fontWeight: 700 }}>
             Préstamo Mi Auto Itaú
           </Typography>
-          <Box component="form">
+          <Box component="form" hidden={hiddeForm !== 1}>
             <FancyInput fullWidth error={false} type="text" label="Email" helperText="" />
             <FancyInput fullWidth error={false} type="password" label="Contraseña" helperText="" />
             <Button
@@ -59,8 +64,32 @@ const Login: NextPage = () => {
               Iniciar sesión
             </Button>
           </Box>
-          {/* TODO hacer un boton que se intercambie el login con olvidar contraseña en la misma ventana */}
-          <a className={'loginLink'}>¿Olvidaste tu contraseña?</a>
+          <Box component="form" hidden={hiddeForm !== 2}>
+            <Typography
+              variant="body1"
+              align="center"
+              sx={{ maxWidth: 300, margin: 'auto', mb: 3 }}
+            >
+              Introducí tu email y seguí los pasos para reestablecer tu contraseña.
+            </Typography>
+            <FancyInput fullWidth error={false} type="text" label="Email" helperText="" />
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ fontSize: 20, fontWeight: 700 }}
+            >
+              Recuperar contraseña
+            </Button>
+          </Box>
+          <Button
+            variant="text"
+            className="btnChange"
+            fullWidth
+            onClick={() => setHiddeForm(hiddeForm == 1 ? 2 : 1)}
+          >
+            {hiddeForm == 1 ? '¿Olvidaste tu contraseña?' : 'Iniciar sesion'}
+          </Button>
         </CardContent>
       </StyledForm>
     </StyledLogin>
