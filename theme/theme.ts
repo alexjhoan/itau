@@ -11,7 +11,9 @@ declare module '@mui/material/styles' {
   interface PaletteOptions extends customColors {}
 }
 
-const theme = responsiveFontSizes(
+let theme = createTheme()
+
+theme = responsiveFontSizes(
   createTheme({
     palette: {
       primary: {
@@ -61,7 +63,10 @@ const theme = responsiveFontSizes(
             minHeight: 50,
             minWidth: 150,
             textTransform: 'capitalize',
-            fontWeight: 700
+            fontWeight: 700,
+            [theme.breakpoints.down('sm')]: {
+              minWidth: 120
+            }
           }
         }
       }

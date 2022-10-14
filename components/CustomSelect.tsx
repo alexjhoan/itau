@@ -9,8 +9,9 @@ import {
   useTheme
 } from '@mui/material'
 import React from 'react'
+import { CustomSelectTypes } from '../types/components'
 
-export const CustomSelectMultiple = ({ label, listItems, value, onChange }: any) => {
+export const CustomSelectMultiple = ({ label, listItems, value, onChange }: CustomSelectTypes) => {
   const theme = useTheme()
   return (
     <FormControl
@@ -20,13 +21,14 @@ export const CustomSelectMultiple = ({ label, listItems, value, onChange }: any)
         borderRadius: theme.spacing(0.5)
       }}
     >
-      <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
+      <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
       <Select
-        labelId="demo-multiple-checkbox-label"
-        id="demo-multiple-checkbox"
+        labelId="multiple-checkbox-label"
+        id="multiple-checkbox"
         multiple
         value={value}
         onChange={onChange}
+        // @ts-ignore eslint-disable-next-line
         renderValue={(selected) => selected.join(', ')}
         input={<OutlinedInput label={label} />}
       >
@@ -41,7 +43,7 @@ export const CustomSelectMultiple = ({ label, listItems, value, onChange }: any)
   )
 }
 
-export const CustomSelect = ({ listItems, value, onChange }: any) => {
+export const CustomSelect = ({ label, listItems, value, onChange }: CustomSelectTypes) => {
   const theme = useTheme()
   return (
     <Select
@@ -55,7 +57,7 @@ export const CustomSelect = ({ listItems, value, onChange }: any) => {
         '& .MuiSelect-select': { padding: '14px' }
       }}
     >
-      <MenuItem value="">Selecionar</MenuItem>
+      <MenuItem value="">{label ? label : 'Seleccionar'}</MenuItem>
       {listItems.map((type: any) => (
         <MenuItem key={type} value={type} sx={{ textTransform: 'capitalize' }}>
           {type}

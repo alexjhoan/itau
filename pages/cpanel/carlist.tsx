@@ -28,6 +28,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { useRouter } from 'next/router'
 
 const StyledIcon = styled(IconButton)(({ theme }) => ({
   backgroundColor: grey[500],
@@ -44,6 +45,7 @@ const StyledIcon = styled(IconButton)(({ theme }) => ({
 
 const Carlist = () => {
   const theme = useTheme()
+  const router = useRouter()
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
   const [item, setItem] = useState('')
 
@@ -96,7 +98,7 @@ const Carlist = () => {
           flexWrap={'wrap'}
           gap={2}
         >
-          <Button variant="contained">
+          <Button variant="contained" onClick={() => router.push('/cpanel/carnew')}>
             <AddIcon sx={{ mr: 1 }} /> Nuevo vehículo
           </Button>
           <Box

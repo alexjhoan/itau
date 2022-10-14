@@ -3,7 +3,7 @@ import React from 'react'
 
 const styles = {
   backgroundColor: '#fff',
-  '& .MuiInputBase-input': { padding: '14px' }
+  '& .MuiInputBase-input:not(.MuiInputBase-inputMultiline)': { padding: '14px' }
 }
 
 export const FancyInput = ({ error, type, label, helperText, ...rest }: TextFieldProps) => {
