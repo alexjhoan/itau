@@ -1,5 +1,5 @@
 import { Box, Container, SelectChangeEvent, Stack, Typography, Grid } from '@mui/material'
-import CustomSelect from '../components/CustomSelect'
+import { CustomSelect } from '../components/CustomSelect'
 import React, { useState } from 'react'
 import { grey } from '@mui/material/colors'
 import PlaceIcon from '@mui/icons-material/Place'
