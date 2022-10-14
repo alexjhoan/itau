@@ -140,7 +140,7 @@ const Prestamos: NextPage = () => {
             title: 'Beneficios',
             content: (
               <>
-                <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                <Typography variant="h6" color="secondary">
                   Características y beneficios
                 </Typography>
                 <ul>
@@ -160,7 +160,7 @@ const Prestamos: NextPage = () => {
             title: 'Requisitos',
             content: (
               <>
-                <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+                <Typography variant="h6" color="secondary">
                   Requisitos
                 </Typography>
                 <ul>

@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import React from 'react'
 
-const CustomSelect = ({ label, listItems, value, onChange }: any) => {
+export const CustomSelectMultiple = ({ label, listItems, value, onChange }: any) => {
   const theme = useTheme()
   return (
     <FormControl
@@ -41,4 +41,26 @@ const CustomSelect = ({ label, listItems, value, onChange }: any) => {
   )
 }
 
-export default CustomSelect
+export const CustomSelect = ({ listItems, value, onChange }: any) => {
+  const theme = useTheme()
+  return (
+    <Select
+      id="multiple-checkbox"
+      displayEmpty
+      value={value}
+      onChange={onChange}
+      sx={{
+        minWidth: 150,
+        backgroundColor: theme.palette.common.white,
+        '& .MuiSelect-select': { padding: '14px' }
+      }}
+    >
+      <MenuItem value="">Selecionar</MenuItem>
+      {listItems.map((type: any) => (
+        <MenuItem key={type} value={type} sx={{ textTransform: 'capitalize' }}>
+          {type}
+        </MenuItem>
+      ))}
+    </Select>
+  )
+}

@@ -34,7 +34,25 @@ const theme = responsiveFontSizes(
       }
     },
     typography: {
-      fontFamily: ['Helvetica', 'Roboto', 'Arial'].join(',')
+      fontFamily: ['Helvetica', 'Roboto', 'Arial'].join(','),
+      h1: {
+        fontWeight: 700
+      },
+      h2: {
+        fontWeight: 700
+      },
+      h3: {
+        fontWeight: 700
+      },
+      h4: {
+        fontWeight: 700
+      },
+      h5: {
+        fontWeight: 700
+      },
+      h6: {
+        fontWeight: 700
+      }
     },
     components: {
       MuiButton: {
@@ -42,7 +60,8 @@ const theme = responsiveFontSizes(
           root: {
             minHeight: 50,
             minWidth: 150,
-            textTransform: 'capitalize'
+            textTransform: 'capitalize',
+            fontWeight: 700
           }
         }
       }

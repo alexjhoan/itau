@@ -67,7 +67,7 @@ const Simulador: NextPage = () => {
     <Box>
       <StyledBanner>
         <Container maxWidth="lg">
-          <Typography variant="h3" color="third.main" sx={{ fontWeight: 700 }}>
+          <Typography variant="h3" color="third.main">
             Tener un auto nuevo,
             <br /> es sencillo
           </Typography>
@@ -86,7 +86,7 @@ const Simulador: NextPage = () => {
               </Tabs>
             </StyledTabsNav>
             <StyledTabsContent hidden={tab !== 0}>
-              <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+              <Typography variant="h6" color="secondary">
                 Características y beneficios
               </Typography>
               <ul>
@@ -101,7 +101,7 @@ const Simulador: NextPage = () => {
               </ul>
             </StyledTabsContent>
             <StyledTabsContent hidden={tab !== 1}>
-              <Typography variant="h6" color="secondary" sx={{ fontWeight: 700 }}>
+              <Typography variant="h6" color="secondary">
                 Requisitos
               </Typography>
               <ul>

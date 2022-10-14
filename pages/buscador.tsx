@@ -1,18 +1,34 @@
 import {
   Box,
   Container,
-  MenuItem,
-  Select,
   SelectChangeEvent,
   Stack,
   Typography,
-  Grid
+  Grid,
+  styled,
+  IconButton
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { NextPage } from 'next'
 import React, { useState } from 'react'
 import AutoCard from '../components/AutoCard'
+import { CustomSelect } from '../components/CustomSelect'
 import Search from '../components/Search'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+
+const StyledIcon = styled(IconButton)(({ theme }) => ({
+  backgroundColor: grey[500],
+  borderRadius: theme.spacing(1),
+  padding: theme.spacing(0.4),
+  '& svg': {
+    fontSize: 30,
+    color: theme.palette.common.white
+  },
+  '&:hover': {
+    backgroundColor: `${grey[500]}b0`
+  }
+}))
 
 const Buscador: NextPage = () => {
   const [item, setItem] = useState('')
@@ -40,21 +56,11 @@ const Buscador: NextPage = () => {
             <Typography variant="body1" color="text.secondary" mr={2}>
               Ordenar por:
             </Typography>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              displayEmpty
+            <CustomSelect
+              listItems={['vistos', 'marca', 'precio']}
               value={item}
               onChange={handleChange}
-              sx={{ minWidth: 150 }}
-            >
-              <MenuItem value="" disabled>
-                Selecionar
-              </MenuItem>
-              <MenuItem value={'vistos'}>Más vistos</MenuItem>
-              <MenuItem value={'marca'}>Marca</MenuItem>
-              <MenuItem value={'precio'}>Menor precio</MenuItem>
-            </Select>
+            />
           </Box>
         </Stack>
         <Grid container spacing={4}>
@@ -66,6 +72,23 @@ const Buscador: NextPage = () => {
               </Grid>
             ))}
         </Grid>
+        <Stack
+          direction={'row'}
+          justifyContent={'flex-end'}
+          alignItems={'center'}
+          py={4}
+          columnGap={2}
+        >
+          <Typography variant="body1" sx={{ color: grey[500] }}>
+            Mostrando 1 - 12 de 60 resultados
+          </Typography>
+          <StyledIcon>
+            <ChevronLeftIcon />
+          </StyledIcon>
+          <StyledIcon>
+            <ChevronRightIcon />
+          </StyledIcon>
+        </Stack>
       </Container>
     </Box>
   )

@@ -3,6 +3,7 @@ import React from 'react'
 import { linksTypes } from '../types/layouts'
 import NavBarDesktop from './navBar/NavBarDesktop'
 import NavBarMobile from './navBar/NavBarMobile'
+import { useRouter } from 'next/router'
 
 const StyledNavBar = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -54,16 +55,36 @@ const links: linksTypes[] = [
   }
 ]
 
+const linksCpanel: linksTypes[] = [
+  {
+    url: '/',
+    name: 'Nombre Apellido',
+    icon: true
+  },
+  {
+    url: '/',
+    name: 'Salir'
+  }
+]
+
 const Header = () => {
   const theme = useTheme()
   const isSm = useMediaQuery(theme.breakpoints.down('md'))
+  const { pathname } = useRouter()
+
   return (
     <StyledNavBar>
       <Container maxWidth="lg">
         {isSm ? (
-          <NavBarMobile links={links} logo={'/img/logo.svg'} />
+          <NavBarMobile
+            links={pathname.includes('cpanel') ? linksCpanel : links}
+            logo={'/img/logo.svg'}
+          />
         ) : (
-          <NavBarDesktop links={links} logo={'/img/logo.svg'} />
+          <NavBarDesktop
+            links={pathname.includes('cpanel') ? linksCpanel : links}
+            logo={'/img/logo.svg'}
+          />
         )}
       </Container>
     </StyledNavBar>

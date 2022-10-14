@@ -98,7 +98,7 @@ const CalculationLoan = () => {
             <Typography variant="body2" color="textSecondary">
               Cantidad de cuotas:
             </Typography>
-            <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }}>
+            <Typography variant="h5" color="primary">
               {month} Coutas
             </Typography>
           </Box>
@@ -106,12 +106,7 @@ const CalculationLoan = () => {
             <Typography variant="body2" color="textSecondary">
               Cantidad de cuotas:
             </Typography>
-            <Typography
-              variant="h5"
-              color="primary"
-              sx={{ fontWeight: 700 }}
-              align={isXs ? 'left' : 'right'}
-            >
+            <Typography variant="h5" color="primary" align={isXs ? 'left' : 'right'}>
               Gs. {amount != 0 && month != 0 ? (amount / month).toLocaleString() : '00.000.000'}
             </Typography>
             <Typography

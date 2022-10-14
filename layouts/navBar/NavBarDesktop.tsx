@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/router'
 import { linksTypes, navBarTypes } from '../../types/layouts'
+import PersonIcon from '@mui/icons-material/Person'
 
 const StyledNav = styled('ul')(({ theme }) => ({
   margin: 0,
@@ -77,9 +78,11 @@ const StyledDropDown = styled(Box)(({ theme }) => ({
 }))
 
 const NavBarDesktop = ({ links, logo }: navBarTypes) => {
-  const router = useRouter()
+  const { pathname } = useRouter()
   return (
-    <StyledNav>
+    <StyledNav
+      sx={{ justifyContent: pathname.includes('cpanel') ? 'space-between' : 'flex-start' }}
+    >
       <li className="logo">
         <Link href="/">
           <a>
@@ -87,29 +90,32 @@ const NavBarDesktop = ({ links, logo }: navBarTypes) => {
           </a>
         </Link>
       </li>
-      {links.map((item: linksTypes, i: number) => (
-        <li key={i}>
-          <Link href={`${item.url}`}>
-            <a className={router.pathname === `${item.url}` ? 'active' : ''}>
-              {item.name}
-              {item.subMenu && <ExpandMoreIcon className="moreIcon" />}
-            </a>
-          </Link>
-          {item.subMenu && (
-            <StyledDropDown className="dropDown">
-              <ul>
-                {item.subMenu.map((sub, j) => (
-                  <li key={j}>
-                    <Link href={`${item.url}${sub.url}`}>
-                      <a>{sub.name}</a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </StyledDropDown>
-          )}
-        </li>
-      ))}
+      <Box display={'flex'} gap={3}>
+        {links.map((item: linksTypes, i: number) => (
+          <li key={i}>
+            <Link href={`${item.url}`}>
+              <a className={pathname === `${item.url}` ? 'active' : ''}>
+                {item.icon && <PersonIcon sx={{ mr: 1, verticalAlign: 'middle' }} />}
+                {item.name}
+                {item.subMenu && <ExpandMoreIcon className="moreIcon" />}
+              </a>
+            </Link>
+            {item.subMenu && (
+              <StyledDropDown className="dropDown">
+                <ul>
+                  {item.subMenu.map((sub, j) => (
+                    <li key={j}>
+                      <Link href={`${item.url}${sub.url}`}>
+                        <a>{sub.name}</a>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </StyledDropDown>
+            )}
+          </li>
+        ))}
+      </Box>
     </StyledNav>
   )
 }

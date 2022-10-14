@@ -1,9 +1,19 @@
-import { Box, Button, Card, CardContent, Slide, styled, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Slide,
+  styled,
+  Typography
+} from '@mui/material'
 import Image from 'next/image'
 import { NextPage } from 'next'
 import { FancyInput } from '../../components/FancyInput'
 import { grey } from '@mui/material/colors'
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const StyledLogin = styled(Box)(() => ({
   display: 'flex',
@@ -44,38 +54,47 @@ const StyledForm = styled(Card)(({ theme }) => ({
 
 const Login: NextPage = () => {
   const [hiddeForm, setHiddeForm] = useState<number>(1)
+  const [inLogin, setInLogin] = useState(false)
   const containerRef = useRef(null)
+  const router = useRouter()
+  const login = () => {
+    setInLogin(true)
+    router.push('/cpanel/carlist')
+  }
+
   return (
     <StyledLogin>
       <StyledForm sx={{ maxWidth: 450 }}>
         <CardContent ref={containerRef}>
           <Image src={'/img/logo.svg'} width={60} height={60} />
-          <Typography variant="h5" color="secondary" sx={{ fontWeight: 700 }}>
+          <Typography variant="h5" color="secondary">
             Préstamo Mi Auto Itaú
           </Typography>
           <Box position={'relative'}>
             <Slide direction="right" in={hiddeForm == 1} container={containerRef.current}>
-              <Box component="form">
-                <FancyInput fullWidth error={false} type="text" label="Email" helperText="" />
-                <FancyInput
-                  fullWidth
-                  error={false}
-                  type="password"
-                  label="Contraseña"
-                  helperText=""
-                />
+              <Box component="form" sx={{ '& > *': { mb: `16px!important` } }}>
+                <FancyInput error={false} type="text" label="Email" helperText="" />
+                <FancyInput error={false} type="password" label="Contraseña" helperText="" />
                 <Button
+                  disabled={inLogin}
                   variant="contained"
                   color="primary"
                   fullWidth
                   sx={{ fontSize: 20, fontWeight: 700 }}
+                  onClick={login}
                 >
-                  Iniciar sesión
+                  {inLogin ? <CircularProgress /> : 'Iniciar sesión'}
                 </Button>
               </Box>
             </Slide>
             <Slide direction="left" in={hiddeForm == 2} container={containerRef.current}>
-              <Box component="form" position={'absolute'} top={0} left={0}>
+              <Box
+                component="form"
+                position={'absolute'}
+                top={0}
+                left={0}
+                sx={{ '& > *': { mb: `16px!important` } }}
+              >
                 <Typography
                   variant="body1"
                   align="center"
@@ -83,7 +102,7 @@ const Login: NextPage = () => {
                 >
                   Introducí tu email y seguí los pasos para reestablecer tu contraseña.
                 </Typography>
-                <FancyInput fullWidth error={false} type="text" label="Email" helperText="" />
+                <FancyInput error={false} type="text" label="Email" helperText="" />
                 <Button
                   variant="contained"
                   color="primary"

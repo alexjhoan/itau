@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 const Sucursales = () => {
   return (
     <Container maxWidth="lg" sx={{ pb: 10 }}>
-      <Typography variant="h4" color="secondary" sx={{ pt: 8, pb: 2, fontWeight: 700 }}>
+      <Typography variant="h4" color="secondary" sx={{ pt: 8, pb: 2 }}>
         Agencias
       </Typography>
       <Typography variant="body1">

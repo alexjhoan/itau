@@ -23,7 +23,7 @@ const DealerCars = () => {
       <Box sx={{ backgroundColor: grey[300], py: 4 }}>
         <Container maxWidth="lg">
           {!route.includes('concesionarias') ? (
-            <Typography variant="h5" pb={2} sx={{ fontWeight: 700 }}>
+            <Typography variant="h5" pb={2}>
               Concesionarias
             </Typography>
           ) : (

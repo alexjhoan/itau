@@ -68,19 +68,12 @@ const Auto = () => {
         <Typography variant="body1" sx={{ fontWeight: 700 }}>
           Nombre Car
         </Typography>
-        <Typography variant="h5" sx={{ fontWeight: 700 }}>
-          Desde USD 25.990
-        </Typography>
+        <Typography variant="h5">Desde USD 25.990</Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
             <CustomThumbsSwiper imageList={Array(10).fill(1)} />
             <Box my={5}>
-              <Typography
-                variant={isMd ? 'h5' : 'h4'}
-                color="secondary"
-                sx={{ fontWeight: 700 }}
-                gutterBottom
-              >
+              <Typography variant={isMd ? 'h5' : 'h4'} color="secondary" gutterBottom>
                 Atributos destacados
               </Typography>
               <Typography variant="body1">
@@ -93,12 +86,7 @@ const Auto = () => {
               </Typography>
             </Box>
             <Box my={5}>
-              <Typography
-                variant={isMd ? 'h5' : 'h4'}
-                color="secondary"
-                sx={{ fontWeight: 700 }}
-                gutterBottom
-              >
+              <Typography variant={isMd ? 'h5' : 'h4'} color="secondary" gutterBottom>
                 Descripción
               </Typography>
               <ul style={{ paddingLeft: 16, columns: 3 }}>
@@ -114,12 +102,7 @@ const Auto = () => {
               </ul>
             </Box>
             <Box my={5}>
-              <Typography
-                variant={isMd ? 'h5' : 'h4'}
-                color="secondary"
-                sx={{ fontWeight: 700 }}
-                gutterBottom
-              >
+              <Typography variant={isMd ? 'h5' : 'h4'} color="secondary" gutterBottom>
                 Características
               </Typography>
               {feature.map((item, j) => (
