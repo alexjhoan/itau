@@ -6,14 +6,14 @@ import {
   Typography,
   Grid,
   Button,
-  TextField,
   FormControl,
   SelectChangeEvent
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { grey } from '@mui/material/colors'
 import { formSearchInitTypes, SearchTypes } from '../types/components'
-import CustomSelect from './CustomSelect'
+import { CustomSelectMultiple } from './CustomSelect'
+import { FancyInput } from './FancyInput'
 
 const StyledSearch = styled(Box)(({ theme }) => ({
   backgroundColor: grey[300],
@@ -71,7 +71,7 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4} lg={2}>
-            <CustomSelect
+            <CustomSelectMultiple
               label={'Tipo de vehículo'}
               listItems={typesCar}
               value={form.typeCar}
@@ -79,7 +79,7 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
             />
           </Grid>
           <Grid item xs={12} sm={4} lg={2}>
-            <CustomSelect
+            <CustomSelectMultiple
               label={'Marca'}
               listItems={brandsCar}
               value={form.brandCar}
@@ -87,7 +87,7 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
             />
           </Grid>
           <Grid item xs={12} sm={4} lg={2}>
-            <CustomSelect
+            <CustomSelectMultiple
               label={'Estado'}
               listItems={statesCar}
               value={form.stateCar}
@@ -96,31 +96,23 @@ const Search = ({ title, subTitle, onClick }: SearchTypes) => {
           </Grid>
           <Grid item xs={12} sm={8} lg={4}>
             <Box display={'flex'} width={'100%'} alignItems={'center'} gap={1}>
-              <TextField
+              <FancyInput
                 type={'number'}
                 label="Min (Gs.)"
-                sx={{ backgroundColor: '#fff', width: '100%' }}
                 onChange={(e) => handleChange(e, 'min')}
                 value={form.min}
               />
               <span>-</span>
-              <TextField
+              <FancyInput
                 type={'number'}
                 label="Max (Gs.)"
-                sx={{ backgroundColor: '#fff', width: '100%' }}
                 onChange={(e) => handleChange(e, 'max')}
                 value={form.max}
               />
             </Box>
           </Grid>
           <Grid item xs={12} sm={4} lg={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              sx={{ height: 55 }}
-              onClick={onClick}
-            >
+            <Button variant="contained" color="primary" fullWidth onClick={onClick}>
               Buscar
             </Button>
           </Grid>

@@ -20,7 +20,7 @@ const StyledSecondCol = styled(Box)(({ theme }) => ({
   }
 }))
 
-const contacto = () => {
+const Contacto = () => {
   const { route } = useRouter()
 
   return (
@@ -40,7 +40,7 @@ const contacto = () => {
             justifyContent={'center'}
           >
             <StyledSecondCol>
-              <Typography variant="h4" color="third.main" sx={{ fontWeight: '700' }}>
+              <Typography variant="h4" color="third.main">
                 Hacé realidad el sueño de tu auto propio
               </Typography>
             </StyledSecondCol>
@@ -51,4 +51,4 @@ const contacto = () => {
   )
 }
 
-export default contacto
+export default Contacto

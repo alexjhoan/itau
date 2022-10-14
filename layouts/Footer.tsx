@@ -6,8 +6,10 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
+import { useRouter } from 'next/router'
 
 const Footer = () => {
+  const { route } = useRouter()
   const theme = useTheme()
   const styleIcon = {
     color: theme.palette.common.white,
@@ -17,7 +19,7 @@ const Footer = () => {
   }
   return (
     <>
-      <Contacto />
+      {!route.includes('cpanel') && <Contacto />}
       <Box sx={{ backgroundColor: theme.palette.primary.main }}>
         <Container maxWidth="lg">
           <Stack direction={'row'} spacing={'2'} alignItems={'center'} justifyContent={'flex-end'}>

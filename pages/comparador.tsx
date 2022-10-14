@@ -110,7 +110,7 @@ const Comparador = () => {
                   <Typography variant="body1" sx={{ fontWeight: 700 }}>
                     Fiat Strada
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }} gutterBottom>
+                  <Typography variant="h5" gutterBottom>
                     Desde Gs. 00.000.000
                   </Typography>
                 </Box>

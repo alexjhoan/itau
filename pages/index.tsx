@@ -117,7 +117,7 @@ const Home: NextPage = () => {
             <StyledBanner sx={{ backgroundImage: 'url(/img/bannerHome.jpg)' }}>
               <Container maxWidth={isMd ? 'md' : 'lg'}>
                 <Box className="contentBanner">
-                  <Typography variant="h4" color="third.main" sx={{ fontWeight: '700' }}>
+                  <Typography variant="h4" color="third.main">
                     Hacé realidad el sueño de tu auto propio
                   </Typography>
                 </Box>

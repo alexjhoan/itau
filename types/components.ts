@@ -18,3 +18,10 @@ export interface formSearchInitTypes {
   min: string
   max: string
 }
+
+export interface CustomSelectTypes {
+  label?: string
+  listItems: string[]
+  value: string[] | string
+  onChange: any
+}
