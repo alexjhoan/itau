@@ -66,7 +66,7 @@ const Login: NextPage = () => {
     <StyledLogin>
       <StyledForm sx={{ maxWidth: 450 }}>
         <CardContent ref={containerRef}>
-          <Image src={'/img/logo.svg'} width={60} height={60} />
+          <Image src={'/img/logo.svg'} width={60} height={60} alt="logo" />
           <Typography variant="h5" color="secondary">
             Préstamo Mi Auto Itaú
           </Typography>
