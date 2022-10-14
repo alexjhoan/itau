@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import React, { useState } from 'react'
-import CustomSelect from '../components/CustomSelect'
+import { CustomSelect } from '../components/CustomSelect'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
