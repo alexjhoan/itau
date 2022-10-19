@@ -15,6 +15,7 @@ import {
 import { grey } from '@mui/material/colors'
 import { FancyInput } from '../../components/FancyInput'
 import { CustomSelect } from '../../components/CustomSelect'
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined'
 
 const typesCar = ['Autos', 'Suv', 'Pick Up', 'Van', 'Utilitarios', 'Motos', 'Embarcación']
 const brandsCar = ['Audi', 'BMW', 'Brillance']
@@ -30,9 +31,52 @@ const StyledcontainerInput = styled(Grid)(({ theme }) => ({
   }
 }))
 
+const StyledInputFile = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  border: `2px dashed ${grey[400]}`,
+  borderRadius: theme.spacing(1),
+  padding: theme.spacing(2),
+  transition: '0.2s',
+  overflow: 'hidden',
+  backgroundColor: theme.palette.common.white,
+  height: 120,
+  '& input': {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    height: '100%',
+    width: '100%',
+    cursor: 'pointer',
+    opacity: 0,
+    zIndex: 3,
+    '&:-webkit-file-upload-button': {
+      width: 0,
+      height: 0,
+      padding: 0,
+      border: 'none'
+    }
+  },
+  '& .imgPreview': {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100%',
+    height: 'auto',
+    maxWidth: '100%',
+    zIndex: 2
+  }
+}))
+
 const Carnew = () => {
   const theme = useTheme()
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
+  const [images, setImages] = useState<string[]>(['', '', '', '', '', ''])
   const [item, setItem] = useState('')
   const [item2, setItem2] = useState('')
   const [item3, setItem3] = useState('')
@@ -46,6 +90,20 @@ const Carnew = () => {
   const handleChange3 = (event: SelectChangeEvent) => {
     setItem3(event.target.value as string)
   }
+  const imgChange = (e: any, index: number) => {
+    const miarray = images.map((item, i) => {
+      if (i == index) {
+        return URL.createObjectURL(e.target.files[0])
+      } else {
+        return item
+      }
+    })
+    setImages(miarray)
+  }
+  const removeImg = () => {
+    setImages(['', '', '', '', '', ''])
+  }
+
   return (
     <>
       <Box sx={{ backgroundColor: grey[300], padding: theme.spacing(5, 0) }}>
@@ -97,7 +155,38 @@ const Carnew = () => {
               </StyledcontainerInput>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="body1">*Imágenes</Typography>
+              <Stack
+                direction={'row'}
+                justifyContent={'space-between'}
+                alignItems={'flex-end'}
+                mb={3}
+              >
+                <Typography variant="body1">*Imágenes</Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={removeImg}
+                  sx={{ minHeight: 30 }}
+                >
+                  remover imagenes
+                </Button>
+              </Stack>
+              <Grid container spacing={2}>
+                {images.map((item, i) => (
+                  <Grid item xs={6} sm={4} key={i}>
+                    <StyledInputFile>
+                      <ImageOutlinedIcon />
+                      <Typography color="textSecondary" align="center">
+                        Agregar
+                        <br />
+                        imágenes
+                      </Typography>
+                      {item && <img src={item} alt="img" className="imgPreview" />}
+                      <input type="file" onChange={(e) => imgChange(e, i)} />
+                    </StyledInputFile>
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
           </Grid>
           <Divider sx={{ borderColor: grey[500], mt: 2 }} />
