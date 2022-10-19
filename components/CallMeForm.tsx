@@ -34,6 +34,9 @@ const StyledForm = styled(Box)(({ theme }) => ({
     [theme.breakpoints.down('md')]: {
       padding: theme.spacing(2)
     }
+  },
+  '& .MuiTextField-root': {
+    marginBottom: theme.spacing(1.5)
   }
 }))
 
